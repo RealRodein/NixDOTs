@@ -112,18 +112,16 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    pciutils lshw vscode discord steam asusctl git
-    waybar cava hyprshot swww kitty fastfetch rofi-wayland
+    pciutils lshw asusctl git
+    waybar kitty fastfetch rofi-wayland mako dolphin #  bar, term, sysinfo, app launcher, notificarion daemon, file expl
+    vscode discord steam firefox obsidian
+    eww cargo rustc    
   ];
 
   # fonts
   fonts.packages = with pkgs; [
     font-awesome jetbrains-mono
   ];
-
-  #enable zsh and ohmy
-  programs.zsh.enable = true;
-  programs.zsh.ohMyZsh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
