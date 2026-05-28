@@ -1,5 +1,5 @@
 {
-  description = "My NixOS system";
+  description = "NixDOTs system";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -11,39 +11,33 @@
 
     noctalia.url = "github:noctalia-dev/noctalia-shell/v5";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixdots.url = "path:/home/rodein/NixDOTs";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-    in {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
+  let
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations.eclipse = nixpkgs.lib.nixosSystem {
+      inherit system;
 
-        specialArgs = {
-          inherit inputs;
-        };
+      specialArgs = { inherit inputs; };
 
-        modules = [
-          ./configuration.nix
+      modules = [
+        ./hosts/eclipse
 
-          home-manager.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
 
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
 
-              extraSpecialArgs = {
-                inherit inputs;
-              };
+            extraSpecialArgs = { inherit inputs; };
 
-              users.rodein = import "${inputs.nixdots}/home/rodein.nix";
-            };
-          }
-        ];
-      };
+            users.rodein = import ./home/rodein.nix;
+          };
+        }
+      ];
     };
+  };
 }
