@@ -33,7 +33,10 @@
 
     "autostart/vesktop.desktop".source = ./dotfiles/autostart/vesktop.desktop;
 
-    "my-scripts/startapps.sh".source = ./dotfiles/my-scripts/startapps.sh;
+    "my-scripts/startapps.sh" = {
+      source = ./dotfiles/my-scripts/startapps.sh;
+      force = true;
+    };
     "my-scripts/toggles-power.sh".source = ./dotfiles/my-scripts/toggles-power.sh;
     "my-scripts/toggles-save.sh".source = ./dotfiles/my-scripts/toggles-save.sh;
     "my-scripts/yazi-portal.sh".source = ./dotfiles/my-scripts/yazi-portal.sh;
