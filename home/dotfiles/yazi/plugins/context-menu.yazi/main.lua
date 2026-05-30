@@ -1,7 +1,12 @@
+local get_hovered_name = ya.sync(function()
+  local h = cx.active.current.hovered
+  return h and tostring(h.name) or nil
+end)
+
 return {
   entry = function()
-    local h = cx.active.current.hovered
-    if not h then return end
+    local name = get_hovered_name()
+    if not name then return end
 
     local cand = ya.which {
       cands = {
@@ -28,18 +33,17 @@ return {
     elseif cand == 3 then
       ya.emit("shell", { '$EDITOR "$@"', block = true })
     elseif cand == 4 then
-      local name, ev = ya.input {
+      local archive, ev = ya.input {
         title = "Zip archive name:",
         value = "archive.zip",
       }
       if ev == 1 then
         ya.emit("shell", {
-          'zip -r ' .. ya.quote(name) .. ' "$@"',
+          'zip -r ' .. ya.quote(archive) .. ' "$@"',
           block = true,
         })
       end
     elseif cand == 5 then
-      local name = tostring(h.name)
       if name:match("%.zip$") then
         local dir = name:gsub("%.zip$", "")
         ya.emit("shell", {

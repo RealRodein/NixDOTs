@@ -3,13 +3,12 @@
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-//spawn-at-startup "noctalia" ">" "/dev/null" "2>&1"
+// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup
 
-// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-// User handles noctalia separately
- spawn-sh-at-startup "noctalia > /dev/null 2>&1"
-// spawn-sh-at-startup "pgrep -f 'wl-paste --watch cliphist store' >/dev/null || (command -v wl-paste >/dev/null && command -v cliphist >/dev/null && wl-paste --watch cliphist store >/dev/null 2>&1 &)"
+spawn-sh-at-startup "noctalia > /dev/null 2>&1"
+
+spawn-at-startup "/home/rodein/NixDOTs/home/dotfiles/my-scripts/startapps.sh"
+
 spawn-sh-at-startup "pgrep -x xwayland-satellite >/dev/null || (command -v Xwayland >/dev/null && command -v xwayland-satellite >/dev/null && xwayland-satellite >/dev/null 2>&1 &)"
 
 hotkey-overlay {
