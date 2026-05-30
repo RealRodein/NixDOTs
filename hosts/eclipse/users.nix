@@ -3,6 +3,6 @@
 {
   users.users.rodein = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
   };
 }

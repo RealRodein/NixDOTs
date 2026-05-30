@@ -1,0 +1,13 @@
+// Modular Niri config entrypoint.
+// Split by concern for easier maintenance.
+
+include "./config.d/devices.kdl"
+include "./config.d/outputs.kdl"
+include "./config.d/decorations.kdl"
+include "./config.d/autostart.kdl"
+include "./config.d/rules.kdl"
+include "./config.d/keybinds.kdl"
+
+// Keep theme overrides last so they can override layout colors.
+// noctalia handled separately by user
+// include "./noctalia.kdl"
