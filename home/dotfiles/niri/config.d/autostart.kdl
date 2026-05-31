@@ -7,8 +7,6 @@
 
 spawn-sh-at-startup "noctalia > /dev/null 2>&1"
 
-spawn-at-startup "/home/rodein/NixDOTs/home/dotfiles/my-scripts/startapps.sh"
-
 spawn-sh-at-startup "pgrep -x xwayland-satellite >/dev/null || (command -v Xwayland >/dev/null && command -v xwayland-satellite >/dev/null && xwayland-satellite >/dev/null 2>&1 &)"
 
 hotkey-overlay {

@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 steam &
 vesktop &
-rog-control-center &
+rog-control-center 
 
-/home/rodein/Applications/miner/Twitch.AppImage --tray & disown
+# /home/rodein/Applications/miner/Twitch.AppImage --tray & disown

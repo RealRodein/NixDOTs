@@ -17,17 +17,38 @@
   };
 
   xdg.configFile = {
-    "niri/config.kdl".source = ./dotfiles/niri/config.kdl;
+    "niri/config.kdl" = {
+      source = ./dotfiles/niri/config.kdl;
+      force = true;
+    };
     "niri/config.d/autostart.kdl" = {
       source = ./dotfiles/niri/config.d/autostart.kdl;
       force = true;
     };
-    "niri/config.d/decorations.kdl".source = ./dotfiles/niri/config.d/decorations.kdl;
-    "niri/config.d/devices.kdl".source = ./dotfiles/niri/config.d/devices.kdl;
-    "niri/config.d/keybinds.kdl".source = ./dotfiles/niri/config.d/keybinds.kdl;
-    "niri/config.d/outputs.kdl".source = ./dotfiles/niri/config.d/outputs.kdl;
-    "niri/config.d/rules.kdl".source = ./dotfiles/niri/config.d/rules.kdl;
-    "niri/config.d/focus-or-spawn.sh".source = ./dotfiles/niri/config.d/focus-or-spawn.sh;
+    "niri/config.d/decorations.kdl" = {
+      source = ./dotfiles/niri/config.d/decorations.kdl;
+      force = true;
+    };
+    "niri/config.d/devices.kdl" = {
+      source = ./dotfiles/niri/config.d/devices.kdl;
+      force = true;
+    };
+    "niri/config.d/keybinds.kdl" = {
+      source = ./dotfiles/niri/config.d/keybinds.kdl;
+      force = true;
+    };
+    "niri/config.d/outputs.kdl" = {
+      source = ./dotfiles/niri/config.d/outputs.kdl;
+      force = true;
+    };
+    "niri/config.d/rules.kdl" = {
+      source = ./dotfiles/niri/config.d/rules.kdl;
+      force = true;
+    };
+    "niri/config.d/focus-or-spawn.sh" = {
+      source = ./dotfiles/niri/config.d/focus-or-spawn.sh;
+      force = true;
+    };
 
     "rog/rog-control-center.cfg".source = ./dotfiles/rog/rog-control-center.cfg;
 
@@ -37,6 +58,7 @@
       source = ./dotfiles/my-scripts/startapps.sh;
       force = true;
     };
+
     "my-scripts/toggles-power.sh".source = ./dotfiles/my-scripts/toggles-power.sh;
     "my-scripts/toggles-save.sh".source = ./dotfiles/my-scripts/toggles-save.sh;
     "my-scripts/yazi-portal.sh".source = ./dotfiles/my-scripts/yazi-portal.sh;

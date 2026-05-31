@@ -17,7 +17,6 @@
     "rd.systemd.show_status=false"
     "udev.log_level=3"
     "vt.global_cursor_default=0"
-    "mem_sleep_default=deep"
   ];
 
   # --- System ---
@@ -42,6 +41,8 @@
     options = "ctrl:rctrl_shift";
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   fonts.packages = with pkgs; [ inter ];
 
   # --- Hardware ---
@@ -57,8 +58,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     prime = {
       offload.enable = true;
@@ -86,25 +86,7 @@
     };
   };
 
-  powerManagement = {
-    powerDownCommands = ''
-      ${pkgs.systemd}/bin/runuser -u rodein -- sh -c '
-        XDG_RUNTIME_DIR=/run/user/1000 \
-        DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
-        WAYLAND_DISPLAY=wayland-1 \
-        ${inputs.noctalia.packages.${pkgs.system}.default}/bin/noctalia msg screen-lock
-      '
-    '';
-    resumeCommands = ''
-      sleep 1
-      ${pkgs.systemd}/bin/runuser -u rodein -- sh -c '
-        XDG_RUNTIME_DIR=/run/user/1000 \
-        DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
-        WAYLAND_DISPLAY=wayland-1 \
-        ${inputs.noctalia.packages.${pkgs.system}.default}/bin/noctalia msg dpms-on
-      '
-    '';
-  };
+
 
   # --- Misc services ---
   services.openssh.enable = true;
