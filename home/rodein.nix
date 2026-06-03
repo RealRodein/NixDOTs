@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.username = "rodein";
@@ -50,7 +50,10 @@
       force = true;
     };
 
-    "niri/noctalia.kdl".source = ./dotfiles/niri/noctalia.kdl;
+    "niri/noctalia.kdl" = {
+      source = ./dotfiles/niri/noctalia.kdl;
+      force = true;
+    };
 
     "rog/rog-control-center.cfg".source = ./dotfiles/rog/rog-control-center.cfg;
 
@@ -74,6 +77,13 @@
 
     "ghostty/config.ghostty".source = ./dotfiles/ghostty/config.ghostty;
   };
+
+  home.activation.ensureNoctaliaSymlink = config.lib.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "$HOME/.local/state/noctalia"
+    if [ ! -L "$HOME/.local/state/noctalia/settings.toml" ] && [ ! -e "$HOME/.local/state/noctalia/settings.toml" ]; then
+      ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
+    fi
+  '';
 
   systemd.user.targets.tray = {
     Unit = {

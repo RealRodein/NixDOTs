@@ -1,0 +1,155 @@
+[backdrop]
+blur_intensity = 0.14999999664723873
+tint_intensity = 0.0
+
+[bar]
+order = [ "Main" ]
+
+    [bar.Main]
+    background_opacity = 0.29999999329447746
+    capsule_opacity = 0.19999999552965164
+    capsule_padding = 7.0
+    capsule_radius = 10.0
+    center = [ "active_window" ]
+    end = [ "tray", "battery", "notifications", "network", "clock", "control-center" ]
+    margin_edge = 6.0
+    margin_ends = 7.0
+    padding = 8
+    radius = 14
+    scale = 1.0500000081956387
+    start = [ "launcher", "workspaces", "media" ]
+    thickness = 40
+    widget_spacing = 10
+
+[control_center]
+sidebar = "full"
+
+[desktop_widgets]
+enabled = false
+schema_version = 1
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[dock]
+background_opacity = 0.29999999999999999
+enabled = true
+icon_size = 30
+inactive_opacity = 0.4999999888241291
+inactive_scale = 0.80000001192092896
+item_spacing = 0
+margin_edge = 5
+padding = 1
+radius = 14
+reserve_space = true
+show_instance_count = false
+
+[hooks]
+started = "noctalia msg action screen-lock & /home/rodein/NixDOTs/home/dotfiles/my-scripts/startapps.sh"
+
+[idle]
+behavior_order = [ "lock", "screen-off", "suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660
+
+    [idle.behavior.suspend]
+    action = "suspend"
+    enabled = true
+    lock_before_suspend = true
+    timeout = 900
+
+[shell]
+font_family = "Inter"
+lang = "en"
+telemetry_enabled = false
+ui_scale = 0.85000000521540642
+
+    [shell.animation]
+    speed = 3.0000000447034836
+
+    [shell.panel]
+    borders = false
+    clipboard_placement = "floating"
+    control_center_placement = "floating"
+    launcher_placement = "floating"
+    open_near_click_clipboard = true
+    open_near_click_control_center = true
+    open_near_click_launcher = true
+    open_near_click_session = true
+    open_near_click_wallpaper = true
+    session_placement = "floating"
+    transparency_mode = "glass"
+    wallpaper_placement = "floating"
+
+    [shell.screen_corners]
+    enabled = true
+    size = 25
+
+    [shell.shadow]
+    alpha = 0.99999997764825821
+    direction = "down_right"
+
+[theme]
+source = "wallpaper"
+wallpaper_scheme = "faithful"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
+    community_ids = [ "discord", "steam", "yazi" ]
+
+[wallpaper]
+directory = "/home/rodein/Pictures"
+
+    [wallpaper.default]
+    path = "/home/rodein/Pictures/wallhaven-exyw3o_3840x2400.png"
+
+    [wallpaper.last]
+    path = "/home/rodein/Pictures/wallhaven-exyw3o_3840x2400.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/rodein/Pictures/wallhaven-exyw3o_3840x2400.png"
+
+[weather]
+auto_locate = true
+
+[widget.active_window]
+max_length = 572.0
+title_scroll = "on_hover"
+
+[widget.clock]
+format = "{:%H:%M}    {:%d.%m}"
+
+[widget.launcher]
+glyph = "snowflake"
+
+[widget.media]
+hide_when_no_media = true
+max_length = 500.0
+scale = 0.94999999999999996
+title_scroll = "on_hover"
+
+[widget.network]
+show_label = false
+
+[widget.tray]
+capsule = true
+capsule_opacity = 0.0
+capsule_radius = 10.0
+drawer = true
+
+[widget.workspaces]
+display = "none"
+hide_when_empty = true
