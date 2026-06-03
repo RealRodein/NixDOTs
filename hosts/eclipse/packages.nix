@@ -35,6 +35,10 @@
     btop
     git
     p7zip
+    superfile
+    helix
+    micro
+    lazygit
 
     # ASUS
     asusctl

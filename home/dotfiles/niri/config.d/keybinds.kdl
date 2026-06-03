@@ -18,7 +18,7 @@ binds {
 
     Mod+R hotkey-overlay-title="App Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+D hotkey-overlay-title="Control Center" { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
-    // Mod+S { } // steam (not installed)
+    Mod+S { spawn "steam"; } // steam (not installed)
     Mod+W hotkey-overlay-title="Helium Browser" { spawn "helium"; }
     // Mod+C { spawn "code"; } (not installed)
 
@@ -31,7 +31,7 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
     XF86AudioMute        allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }
 
-    XF86AudioMicMute     allow-when-locked=true { spawn "noctalia" "msg" "mic-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "noctalia" "msg" "media" "toggle"; }
 
     XF86Launch1 { spawn "rog-control-center"; }
 
@@ -182,7 +182,7 @@ binds {
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
+    // Mod+Tab { toggle-overview; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.

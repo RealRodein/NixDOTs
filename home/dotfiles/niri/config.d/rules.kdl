@@ -35,14 +35,14 @@ window-rule {
 
 // Enable rounded corners for all windows.
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 10
     clip-to-geometry true
 }
 
 // Dim inactive windows
 window-rule {
     match is-active=false
-    opacity 0.5
+    opacity 0.7
     background-effect {
         blur true
         //noise 0.08      // adds visual noise (0.0–1.0)

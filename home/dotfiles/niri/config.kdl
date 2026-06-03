@@ -8,6 +8,4 @@ include "./config.d/autostart.kdl"
 include "./config.d/rules.kdl"
 include "./config.d/keybinds.kdl"
 
-// Keep theme overrides last so they can override layout colors.
-// noctalia handled separately by user
-// include "./noctalia.kdl"
+include "./noctalia.kdl"

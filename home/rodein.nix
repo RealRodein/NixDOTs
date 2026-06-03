@@ -50,6 +50,8 @@
       force = true;
     };
 
+    "niri/noctalia.kdl".source = ./dotfiles/niri/noctalia.kdl;
+
     "rog/rog-control-center.cfg".source = ./dotfiles/rog/rog-control-center.cfg;
 
     "autostart/vesktop.desktop".source = ./dotfiles/autostart/vesktop.desktop;
@@ -69,6 +71,8 @@
     "yazi/init.lua".source = ./dotfiles/yazi/init.lua;
     "yazi/open-pdf-in-terminal.sh".source = ./dotfiles/yazi/open-pdf-in-terminal.sh;
     "yazi/plugins/context-menu.yazi/main.lua".source = ./dotfiles/yazi/plugins/context-menu.yazi/main.lua;
+
+    "ghostty/config.ghostty".source = ./dotfiles/ghostty/config.ghostty;
   };
 
   systemd.user.targets.tray = {
