@@ -8,6 +8,7 @@
     editor = false;
   };
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 0;
 
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
@@ -24,7 +25,17 @@
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Prague";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    max-jobs = "auto";
+    cores = 0;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-old-generations 5";
+  };
 
   # --- Display / Desktop ---
   services.greetd = {
