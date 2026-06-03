@@ -95,10 +95,13 @@
     "ghostty/config.ghostty".source = ./dotfiles/ghostty/config.ghostty;
   };
 
-  home.activation.ensureNoctaliaSymlink = config.lib.dag.entryAfter ["writeBoundary"] ''
+  home.activation.ensureNoctaliaSymlinks = config.lib.dag.entryAfter ["writeBoundary"] ''
     mkdir -p "$HOME/.local/state/noctalia"
     if [ ! -L "$HOME/.local/state/noctalia/settings.toml" ] && [ ! -e "$HOME/.local/state/noctalia/settings.toml" ]; then
       ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
+    fi
+    if [ ! -L "$HOME/.local/state/noctalia/logos" ] && [ ! -d "$HOME/.local/state/noctalia/logos" ]; then
+      ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/logos" "$HOME/.local/state/noctalia/logos"
     fi
   '';
 

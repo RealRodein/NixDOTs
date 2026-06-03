@@ -17,7 +17,7 @@ order = [ "Main" ]
     padding = 8
     radius = 14
     scale = 1.0500000081956387
-    start = [ "launcher", "workspaces", "media" ]
+    start = [ "launcher", "spacer_1", "workspaces", "media" ]
     thickness = 40
     widget_spacing = 10
 
@@ -132,8 +132,13 @@ title_scroll = "on_hover"
 [widget.clock]
 format = "{:%H:%M}    {:%d.%m}"
 
+[widget.control-center]
+scale = 1.2
+
 [widget.launcher]
-glyph = "snowflake"
+custom_image = "/home/rodein/.local/state/noctalia/logos/nix-snowflake-white.svg"
+glyph = ""
+scale = 1.2
 
 [widget.media]
 hide_when_no_media = true
@@ -143,6 +148,9 @@ title_scroll = "on_hover"
 
 [widget.network]
 show_label = false
+
+[widget.spacer_1]
+type = "spacer"
 
 [widget.tray]
 capsule = true
