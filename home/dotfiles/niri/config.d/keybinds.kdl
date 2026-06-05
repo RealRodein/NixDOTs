@@ -19,7 +19,7 @@ binds {
     Mod+R hotkey-overlay-title="App Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+D hotkey-overlay-title="Control Center" { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
     Mod+S { spawn "steam"; } // steam (not installed)
-    Mod+W hotkey-overlay-title="Helium Browser" { spawn "helium"; }
+    Mod+W hotkey-overlay-title="Helium Browser" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh helium helium"; }
     // Mod+C { spawn "code"; } (not installed)
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.

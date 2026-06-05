@@ -12,14 +12,14 @@ order = [ "Main" ]
     capsule_opacity = 0.20000000000000001
     capsule_padding = 8.0
     capsule_radius = 12
-    center = [ "active_window" ]
+    center = [ "media", "active_window", "audio_visualizer" ]
     end = [ "tray", "battery", "notifications", "network", "clock", "control-center" ]
     margin_edge = 5
     margin_ends = 5
     padding = 0
     radius = 14
     scale = 1.0500000081956387
-    start = [ "launcher", "spacer_1", "workspaces", "media", "audio_visualizer" ]
+    start = [ "launcher", "spacer_1", "workspaces" ]
     thickness = 40
     widget_spacing = 10
 
@@ -138,8 +138,12 @@ directory = "/home/rodein/Pictures/Wallpapers"
 auto_locate = true
 
 [widget.active_window]
-max_length = 572.0
+max_length = 400
 title_scroll = "on_hover"
+
+[widget.audio_visualizer]
+centered = false
+width = 300.0
 
 [widget.clock]
 format = "{:%H:%M}    {:%d.%m}"
@@ -163,10 +167,10 @@ art_size = 50.0
 capsule_padding = 4.0
 capsule_radius = 10
 hide_when_no_media = true
-max_length = 500
+max_length = 300
 min_length = 0
 scale = 0.94999999999999996
-title_scroll = "always"
+title_scroll = "on_hover"
 
 [widget.network]
 show_label = false
