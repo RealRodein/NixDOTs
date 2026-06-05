@@ -40,6 +40,9 @@
     micro
     lazygit
 
+    wtype
+    jq
+
     # ASUS
     asusctl
     supergfxctl

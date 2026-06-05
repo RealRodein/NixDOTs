@@ -14,7 +14,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh ghostty ghostty --on-focused wtype -M ctrl -M shift -k t"; }
 
     Mod+R hotkey-overlay-title="App Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+D hotkey-overlay-title="Control Center" { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
@@ -49,7 +49,7 @@ binds {
     // added
     Mod+E { spawn "ghostty" "-e" "yazi"; }
 
-    Mod+Q repeat=false { close-window; }
+    Mod+Q repeat=false { spawn-sh "~/.config/niri/config.d/close-or-tab.sh"; }
 
     Mod+Left  { focus-column-left; }
     //Mod+Down  { focus-window-down; }

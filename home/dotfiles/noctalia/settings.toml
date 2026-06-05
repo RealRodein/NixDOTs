@@ -6,18 +6,20 @@ tint_intensity = 0.0
 order = [ "Main" ]
 
     [bar.Main]
-    background_opacity = 0.29999999329447746
-    capsule_opacity = 0.19999999552965164
-    capsule_padding = 7.0
-    capsule_radius = 10.0
+    background_opacity = 0.39999999105930328
+    capsule = true
+    capsule_fill = "on_primary"
+    capsule_opacity = 0.20000000000000001
+    capsule_padding = 8.0
+    capsule_radius = 12
     center = [ "active_window" ]
     end = [ "tray", "battery", "notifications", "network", "clock", "control-center" ]
-    margin_edge = 6.0
-    margin_ends = 7.0
-    padding = 8
+    margin_edge = 5
+    margin_ends = 5
+    padding = 0
     radius = 14
     scale = 1.0500000081956387
-    start = [ "launcher", "spacer_1", "workspaces", "media" ]
+    start = [ "launcher", "spacer_1", "workspaces", "media", "audio_visualizer" ]
     thickness = 40
     widget_spacing = 10
 
@@ -47,6 +49,7 @@ margin_edge = 5
 padding = 1
 radius = 14
 reserve_space = true
+show_dots = true
 show_instance_count = false
 
 [hooks]
@@ -71,9 +74,18 @@ behavior_order = [ "lock", "screen-off", "suspend" ]
     lock_before_suspend = true
     timeout = 900
 
+[notification]
+allowed_urgencies = [ "low", "normal", "critical" ]
+background_opacity = 0.39999999105930328
+layer = "overlay"
+offset_x = 5
+offset_y = 5
+scale = 0.90000000596046448
+
 [shell]
 font_family = "Inter"
 lang = "en"
+settings_show_advanced = true
 telemetry_enabled = false
 ui_scale = 0.85000000521540642
 
@@ -107,20 +119,20 @@ source = "wallpaper"
 wallpaper_scheme = "faithful"
 
     [theme.templates]
-    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri", "qt" ]
     community_ids = [ "discord", "steam", "yazi" ]
 
 [wallpaper]
-directory = "/home/rodein/Pictures"
+directory = "/home/rodein/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/rodein/Pictures/wallhaven-exyw3o_3840x2400.png"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-w5mlmp.jpg"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/wallhaven-exyw3o_3840x2400.png"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-w5mlmp.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/wallhaven-exyw3o_3840x2400.png"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-w5mlmp.jpg"
 
 [weather]
 auto_locate = true
@@ -133,23 +145,37 @@ title_scroll = "on_hover"
 format = "{:%H:%M}    {:%d.%m}"
 
 [widget.control-center]
+capsule = true
+capsule_opacity = 0.0
+capsule_padding = 10.0
 scale = 1.2
 
 [widget.launcher]
+capsule = true
+capsule_opacity = 0.0
+capsule_radius = "auto"
 custom_image = "/home/rodein/.local/state/noctalia/logos/nix-snowflake-white.svg"
 glyph = ""
 scale = 1.2
 
 [widget.media]
+art_size = 50.0
+capsule_padding = 4.0
+capsule_radius = 10
 hide_when_no_media = true
-max_length = 500.0
+max_length = 500
+min_length = 0
 scale = 0.94999999999999996
-title_scroll = "on_hover"
+title_scroll = "always"
 
 [widget.network]
 show_label = false
 
 [widget.spacer_1]
+length = 10
+type = "spacer"
+
+[widget.spacer_2]
 type = "spacer"
 
 [widget.tray]
@@ -160,4 +186,3 @@ drawer = true
 
 [widget.workspaces]
 display = "none"
-hide_when_empty = true

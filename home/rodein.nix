@@ -66,6 +66,10 @@
       source = ./dotfiles/niri/config.d/focus-or-spawn.sh;
       force = true;
     };
+    "niri/config.d/close-or-tab.sh" = {
+      source = ./dotfiles/niri/config.d/close-or-tab.sh;
+      force = true;
+    };
 
     "niri/noctalia.kdl" = {
       source = ./dotfiles/niri/noctalia.kdl;
@@ -73,8 +77,6 @@
     };
 
     "rog/rog-control-center.cfg".source = ./dotfiles/rog/rog-control-center.cfg;
-
-    "autostart/vesktop.desktop".source = ./dotfiles/autostart/vesktop.desktop;
 
     "my-scripts/startapps.sh" = {
       source = ./dotfiles/my-scripts/startapps.sh;
