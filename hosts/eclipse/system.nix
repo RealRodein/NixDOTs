@@ -71,6 +71,7 @@
   # --- Hardware ---
   hardware.bluetooth.enable = true;
   hardware.graphics.enable = true;
+  programs.dconf.enable = true;
 
   programs.steam = {
     enable = true;
