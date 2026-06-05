@@ -14,10 +14,22 @@
     size = 24;
   };
 
-  gtk.cursorTheme = {
-    name = "Bibata-Modern-Classic";
-    package = pkgs.bibata-cursors;
-    size = 24;
+  gtk = {
+    enable = true;
+
+    cursorTheme = {
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+      size = 24;
+    };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig = {
+      gtk-color-scheme = "prefer-dark";
+    };
   };
 
   home.sessionVariables = {

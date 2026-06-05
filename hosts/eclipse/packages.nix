@@ -38,6 +38,7 @@
     superfile
     helix
     micro
+    neovim
     lazygit
 
     wtype

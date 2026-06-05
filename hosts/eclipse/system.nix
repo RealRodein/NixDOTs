@@ -91,6 +91,8 @@
   };
 
   # --- ASUS / GPU switching ---
+  boot.kernelModules = [ "acpi_call" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   services.asusd.enable = true;
   services.supergfxd.enable = true;
 
