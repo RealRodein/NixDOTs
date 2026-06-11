@@ -26,6 +26,24 @@ order = [ "Main" ]
 [control_center]
 sidebar = "full"
 
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "wallpaper"
+
 [desktop_widgets]
 enabled = false
 schema_version = 1
@@ -79,9 +97,6 @@ behavior_order = [ "lock", "screen-off", "suspend" ]
 
 [location]
 auto_locate = true
-
-[lockscreen]
-blurred_desktop = true
 
 [lockscreen_widgets]
 enabled = false
@@ -152,8 +167,10 @@ ui_scale = 0.85000000521540642
 gpu_poll_seconds = 10
 
 [theme]
+community_palette = "m3-content"
+custom_palette = "ADW"
 source = "wallpaper"
-wallpaper_scheme = "faithful"
+wallpaper_scheme = "vibrant"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri", "qt" ]
@@ -163,13 +180,13 @@ wallpaper_scheme = "faithful"
 directory = "/home/rodein/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-8gr6l2.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-8gr6l2.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-8gr6l2.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
 
 [weather]
 auto_locate = true

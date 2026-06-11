@@ -17,8 +17,8 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh ghostty ghostty --on-focused wtype -M ctrl -M shift -k t"; }
 
     Mod+R hotkey-overlay-title="App Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Mod+D hotkey-overlay-title="Control Center" { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
-    Mod+S { spawn "steam"; } // steam (not installed)
+    Mod+S hotkey-overlay-title="Steam" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh steam steam"; }
+    Mod+D hotkey-overlay-title="Vesktop" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh vesktop vesktop"; }
     Mod+W hotkey-overlay-title="Zen Browser" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh zen zen"; }
     // Mod+C { spawn "code"; } (not installed)
 
@@ -182,7 +182,7 @@ binds {
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    // Mod+Tab { toggle-overview; }
+    Mod+Tab { toggle-overview; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
