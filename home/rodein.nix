@@ -88,7 +88,10 @@
       force = true;
     };
 
-    "rog/rog-control-center.cfg".source = ./dotfiles/rog/rog-control-center.cfg;
+    "rog/rog-control-center.cfg" = {
+      source = ./dotfiles/rog/rog-control-center.cfg;
+      force = true;
+    };
 
     "my-scripts/startapps.sh" = {
       source = ./dotfiles/my-scripts/startapps.sh;
@@ -125,5 +128,4 @@
       Requires = [ "graphical-session-pre.target" ];
     };
   };
-
 }
