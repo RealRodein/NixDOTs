@@ -18,6 +18,7 @@
     "rd.systemd.show_status=false"
     "udev.log_level=3"
     "vt.global_cursor_default=0"
+    "nowatchdog"
   ];
 
   # --- System ---
