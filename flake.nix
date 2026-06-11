@@ -12,8 +12,8 @@
     noctalia.url = "github:noctalia-dev/noctalia-shell/v5";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
 
-    helium = {
-      url = "github:schembriaiden/helium-browser-nix-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
