@@ -41,8 +41,8 @@
     # Power
     auto-cpufreq
 
+    appimage-run
     dotnet-runtime_10
-    webkitgtk_4_1
     unzip
     rpm
 
