@@ -69,6 +69,16 @@
 
   fonts.packages = with pkgs; [ inter ];
 
+  # --- Audio ---
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
+
   # --- Hardware ---
   hardware.bluetooth.enable = true;
   hardware.graphics.enable = true;
