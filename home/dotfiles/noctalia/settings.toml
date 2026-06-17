@@ -3,58 +3,161 @@ blur_intensity = 0.14999999664723873
 tint_intensity = 0.0
 
 [bar]
-order = [ "Main" ]
+order = [ "Main", "Bottom" ]
+
+    [bar.Bottom]
+    auto_hide = true
+    background_opacity = 0.4999999888241291
+    center = [ "session", "group:g1", "group:g2" ]
+    end = []
+    margin_edge = 0
+    margin_ends = 330
+    padding = 0
+    position = "right"
+    radius = 19
+    radius_bottom_right = 0
+    radius_top_right = 0
+    reserve_space = false
+    start = []
+    thickness = 60
+    widget_spacing = 13
+
+        [[bar.Bottom.capsule_group]]
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "ram", "cpu", "network_rx", "network_tx" ]
+        opacity = 0.0
+        padding = 0.0
+
+        [[bar.Bottom.capsule_group]]
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "screen_recorder", "caffeine", "screenshot", "clipboard", "bluetooth", "wallpaper" ]
+        opacity = 0.0
+        padding = 0.0
 
     [bar.Main]
-    background_opacity = 0.39999999105930328
+    background_opacity = 0.4999999888241291
     capsule = true
     capsule_fill = "on_primary"
-    capsule_opacity = 0.20000000000000001
+    capsule_opacity = 0.24999999441206455
     capsule_padding = 10.0
     capsule_radius = 11
-    center = [ "media", "active_window", "audio_visualizer" ]
+    center = [ "active_window" ]
     end = [ "tray", "battery", "notifications", "network", "clock", "control-center" ]
     margin_edge = 5
     margin_ends = 5
     padding = 0
     radius = 14
     scale = 1.0500000081956387
-    start = [ "launcher", "spacer_1", "workspaces" ]
+    start = [ "launcher", "spacer_1", "workspaces", "media" ]
     thickness = 40
     widget_spacing = 8
 
 [control_center]
 sidebar = "full"
 
-    [[control_center.shortcuts]]
-    type = "wifi"
-
-    [[control_center.shortcuts]]
-    type = "bluetooth"
-
-    [[control_center.shortcuts]]
-    type = "caffeine"
-
-    [[control_center.shortcuts]]
-    type = "nightlight"
-
-    [[control_center.shortcuts]]
-    type = "notification"
-
-    [[control_center.shortcuts]]
-    type = "wallpaper"
-
 [desktop_widgets]
-enabled = false
 schema_version = 1
-widget_order = []
+widget_order = [
+    "desktop-widget-0000000000000003",
+    "desktop-widget-0000000000000004",
+    "desktop-widget-0000000000000005",
+    "desktop-widget-0000000000000006",
+    "desktop-widget-0000000000000007"
+]
 
     [desktop_widgets.grid]
-    cell_size = 16
+    cell_size = 24
     major_interval = 4
     visible = true
 
-    [desktop_widgets.widget]
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    cx = 1.9384231567382812
+    cy = 608.4830322265625
+    output = "eDP-1"
+    rotation = -1.5707963705062866
+    scale = 6.1123208999633789
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
+        aspect_ratio = 1.9000000000000001
+        background = false
+        background_opacity = 0.0
+        background_padding = 14.0
+        background_radius = 0.0
+        bands = 24.0
+        centered = true
+        high_color = "secondary"
+        low_color = "primary"
+        mirrored = true
+        show_when_idle = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    cx = 1688.118408203125
+    cy = 174.95263671875
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.763157844543457
+    type = "weather"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
+        background = true
+        background_opacity = 0.47000000000000003
+        background_padding = 0.0
+        background_radius = 17.0
+        shadow = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000005]
+    cx = 296.16000366210938
+    cy = 976.4000244140625
+    enabled = false
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.6000000238418579
+    type = "media_player"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+        background_opacity = 0.51000000000000001
+        background_padding = 16.0
+        background_radius = 16.0
+        layout = "horizontal"
+        shadow = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000006]
+    cx = 1530.5
+    cy = 1021.0999755859375
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+        background = true
+        background_opacity = 0.53000000000000003
+        background_padding = 17.0
+        background_radius = 17.0
+        shadow = false
+        show_label = true
+        stat = "net_rx"
+        stat2 = "net_tx"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000007]
+    cx = 1734.029052734375
+    cy = 1021.358642578125
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 0.9930838942527771
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+        background_opacity = 0.54000000000000004
+        background_padding = 17.0
+        background_radius = 17.0
+        shadow = false
+        show_label = true
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
 
 [dock]
 background_opacity = 0.40000000000000002
@@ -99,22 +202,71 @@ pre_action_fade_seconds = 10
 auto_locate = true
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 1
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003"
+]
 
     [lockscreen_widgets.grid]
-    cell_size = 16
+    cell_size = 64
     major_interval = 4
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    cx = 960.0
-    cy = 1077.0
+    cx = 964.0
+    cy = 728.0
     output = "eDP-1"
     rotation = 0.0
     scale = 1.0
     type = "login_box"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    cx = 301.25
+    cy = 1065.0999755859375
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.3366012573242188
+    type = "weather"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = true
+        background_opacity = 0.54000000000000004
+        background_padding = 6.0
+        background_radius = 18.0
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    cx = 1616.0
+    cy = 1069.5
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background_opacity = 0.54000000000000004
+        background_padding = 17.0
+        background_radius = 17.0
+        format = "{:%H:%M:%S}"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    cx = 964.0
+    cy = 525.07171630859375
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.2479023933410645
+    type = "sticker"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background_opacity = 0.51000000000000001
+        background_padding = 16.0
+        background_radius = 16.0
+        image_path = "/home/rodein/Pictures/Wallpapers/pfp.jpg"
+        opacity = 1.0
 
 [notification]
 allowed_urgencies = [ "low", "normal", "critical" ]
@@ -137,9 +289,6 @@ lang = "en"
 settings_show_advanced = true
 telemetry_enabled = false
 ui_scale = 0.85000000521540642
-
-    [shell.animation]
-    speed = 3.0000000447034836
 
     [shell.panel]
     borders = false
@@ -173,30 +322,31 @@ source = "wallpaper"
 wallpaper_scheme = "vibrant"
 
     [theme.templates]
-    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri", "qt" ]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
     community_ids = [ "neovim", "discord", "steam", "yazi" ]
 
 [wallpaper]
 directory = "/home/rodein/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
 
 [weather]
 auto_locate = true
 
 [widget.active_window]
-max_length = 400
-title_scroll = "on_hover"
+max_length = 700
+title_scroll = "always"
 
 [widget.audio_visualizer]
-centered = false
+mirrored = false
+show_when_idle = true
 width = 300.0
 
 [widget.clock]
@@ -208,6 +358,10 @@ capsule_opacity = 0.0
 capsule_padding = 10.0
 scale = 1.2
 
+[widget.cpu]
+display = "text"
+stat = "cpu_temp"
+
 [widget.launcher]
 capsule = true
 capsule_opacity = 0.0
@@ -217,17 +371,33 @@ glyph = ""
 scale = 1.2
 
 [widget.media]
-art_size = 50.0
+art_size = 36.0
 capsule_padding = 4.0
 capsule_radius = 10
 hide_when_no_media = true
-max_length = 300
+max_length = 400
 min_length = 0
 scale = 0.94999999999999996
-title_scroll = "on_hover"
+title_scroll = "always"
 
 [widget.network]
 show_label = false
+
+[widget.network_rx]
+display = "text"
+scale = 0.85000000000000009
+
+[widget.network_tx]
+display = "text"
+scale = 0.85000000000000009
+
+[widget.screen_recorder]
+script = "scripts/screen_recorder.lua"
+type = "scripted"
+
+[widget.session]
+font_weight = 700
+scale = 1.55
 
 [widget.spacer_1]
 length = 10
@@ -235,6 +405,9 @@ type = "spacer"
 
 [widget.spacer_2]
 type = "spacer"
+
+[widget.sysmon]
+stat = "net_rx"
 
 [widget.tray]
 capsule = true

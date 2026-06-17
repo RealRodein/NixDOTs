@@ -88,11 +88,6 @@
       force = true;
     };
 
-    "rog/rog-control-center.cfg" = {
-      source = ./dotfiles/rog/rog-control-center.cfg;
-      force = true;
-    };
-
     "my-scripts/startapps.sh" = {
       source = ./dotfiles/my-scripts/startapps.sh;
       force = true;
@@ -119,6 +114,14 @@
     fi
     if [ ! -L "$HOME/.local/state/noctalia/logos" ] && [ ! -d "$HOME/.local/state/noctalia/logos" ]; then
       ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/logos" "$HOME/.local/state/noctalia/logos"
+    fi
+  '';
+
+  home.activation.copyRogConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -f "$HOME/.config/rog/rog-control-center.cfg" ] || [ -L "$HOME/.config/rog/rog-control-center.cfg" ]; then
+      mkdir -p "$HOME/.config/rog"
+      cp -f "${./dotfiles/rog/rog-control-center.cfg}" "$HOME/.config/rog/rog-control-center.cfg"
+      chmod 644 "$HOME/.config/rog/rog-control-center.cfg"
     fi
   '';
 
