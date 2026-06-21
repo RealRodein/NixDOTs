@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-steam &
+taskset -c 0-11 steam &
 vesktop &
 rog-control-center 
 

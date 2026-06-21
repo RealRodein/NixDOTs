@@ -17,7 +17,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh ghostty ghostty --on-focused wtype -M ctrl -M shift -k t"; }
 
     Mod+R hotkey-overlay-title="App Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Mod+S hotkey-overlay-title="Steam" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh steam steam"; }
+    Mod+S hotkey-overlay-title="Steam" { spawn-sh "taskset -c 0-11 ~/.config/niri/config.d/focus-or-spawn.sh steam steam"; }
     Mod+D hotkey-overlay-title="Vesktop" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh vesktop vesktop"; }
     Mod+W hotkey-overlay-title="Zen Browser" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh zen zen"; }
     // Mod+C { spawn "code"; } (not installed)
