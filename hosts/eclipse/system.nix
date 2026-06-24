@@ -83,6 +83,7 @@
   hardware.bluetooth.enable = true;
   hardware.graphics.enable = true;
   programs.dconf.enable = true;
+  programs.fish.enable = true;
 
   programs.steam = {
     enable = true;
@@ -102,15 +103,28 @@
     };
   };
 
+  # --- Kernel ---
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # --- ASUS / GPU switching ---
   boot.kernelModules = [ "acpi_call" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   services.asusd.enable = true;
-  services.supergfxd.enable = true;
+  # services.supergfxd.enable = true;
 
   # --- Power ---
   services.upower.enable = true;
   services.power-profiles-daemon.enable = false;
+
+  environment.etc."auto-cpufreq.conf".text = ''
+    [charger]
+    governor = "performance"
+    turbo = "never"
+
+    [battery]
+    governor = "powersave"
+    turbo = "never"
+  '';
 
   systemd.services.auto-cpufreq = {
     description = "auto-cpufreq - Automatic CPU speed & power optimizer";
