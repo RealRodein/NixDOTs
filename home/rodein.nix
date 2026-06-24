@@ -8,6 +8,22 @@
 
   programs.home-manager.enable = true;
 
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      if [ -f "$(command -v fish)" ]; then
+        exec fish
+      fi
+    '';
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting
+    '';
+  };
+
   home.pointerCursor = {
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
