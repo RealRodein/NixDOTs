@@ -98,19 +98,19 @@
       source = ./dotfiles/niri/config.d/close-or-tab.sh;
       force = true;
     };
-
-    "niri/noctalia.kdl" = {
-      source = ./dotfiles/niri/noctalia.kdl;
-      force = true;
-    };
-
     "my-scripts/startapps.sh" = {
       source = ./dotfiles/my-scripts/startapps.sh;
       force = true;
     };
 
-    "my-scripts/toggles-power.sh".source = ./dotfiles/my-scripts/toggles-power.sh;
-    "my-scripts/toggles-save.sh".source = ./dotfiles/my-scripts/toggles-save.sh;
+    "my-scripts/toggles-power.sh" = {
+      source = ./dotfiles/my-scripts/toggles-power.sh;
+      force = true;
+    };
+    "my-scripts/toggles-save.sh" = {
+      source = ./dotfiles/my-scripts/toggles-save.sh;
+      force = true;
+    };
     "my-scripts/yazi-portal.sh".source = ./dotfiles/my-scripts/yazi-portal.sh;
     "my-scripts/sync-flatpak-steam-icons.sh".source = ./dotfiles/my-scripts/sync-flatpak-steam-icons.sh;
 
@@ -121,6 +121,8 @@
     "yazi/plugins/context-menu.yazi/main.lua".source = ./dotfiles/yazi/plugins/context-menu.yazi/main.lua;
 
     "ghostty/config.ghostty".source = ./dotfiles/ghostty/config.ghostty;
+
+    "MangoHud/MangoHud.conf".source = ./dotfiles/mangohud/MangoHud.conf;
   };
 
   home.activation.ensureNoctaliaSymlinks = config.lib.dag.entryAfter ["writeBoundary"] ''
