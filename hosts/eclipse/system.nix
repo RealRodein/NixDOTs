@@ -19,6 +19,7 @@
     "udev.log_level=3"
     "vt.global_cursor_default=0"
     "nowatchdog"
+    "intel_pstate=no_turbo"
   ];
 
   # --- System ---
@@ -116,20 +117,30 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = false;
 
-  environment.etc."auto-cpufreq.conf".text = ''
-    [charger]
-    governor = "performance"
-    turbo = "never"
-
-    [battery]
-    governor = "powersave"
-    turbo = "never"
-  '';
+  # Poll no_turbo every 1s — asusd re-enables it otherwise
+  systemd.services.disable-turbo = {
+    description = "Keep Intel Turbo Boost disabled";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "sysinit.target" ];
+    before = [ "asusd.service" "auto-cpufreq.service" ];
+    unitConfig.DefaultDependencies = false;
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
+      RestartSec = "1s";
+      ExecStart = "${pkgs.writeShellScript "disable-turbo" ''
+        while true; do
+          echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
+          sleep 1
+        done
+      ''}";
+    };
+  };
 
   systemd.services.auto-cpufreq = {
     description = "auto-cpufreq - Automatic CPU speed & power optimizer";
     wantedBy = [ "multi-user.target" ];
-    after = [ "multi-user.target" ];
+    path = [ pkgs.bash ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.auto-cpufreq}/bin/auto-cpufreq --daemon";
