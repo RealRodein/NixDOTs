@@ -38,6 +38,8 @@ order = [ "Main", "Bottom" ]
 
     [bar.Main]
     background_opacity = 0.4999999888241291
+    border = "primary"
+    border_width = 0.5
     capsule = true
     capsule_fill = "on_primary"
     capsule_opacity = 0.24999999441206455
@@ -334,7 +336,6 @@ telemetry_enabled = true
 ui_scale = 0.85000000521540642
 
     [shell.panel]
-    borders = false
     clipboard_placement = "floating"
     control_center_placement = "floating"
     launcher_placement = "floating"
@@ -352,17 +353,18 @@ ui_scale = 0.85000000521540642
     size = 25
 
     [shell.shadow]
-    alpha = 0.669999985024333
     direction = "down_right"
 
 [system.monitor]
 gpu_poll_seconds = 10
 
 [theme]
+builtin = "Ayu"
 community_palette = "m3-content"
-custom_palette = "wallhaven-9or96k-fs"
+custom_palette = "wallhaven-jev9xw-mut"
+mode = "auto"
 source = "wallpaper"
-wallpaper_scheme = "vibrant"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
@@ -370,6 +372,7 @@ wallpaper_scheme = "vibrant"
 
 [wallpaper]
 directory = "/home/rodein/Pictures/Wallpapers"
+fill_mode = "center"
 
     [wallpaper.default]
     path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
@@ -379,6 +382,16 @@ directory = "/home/rodein/Pictures/Wallpapers"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-w5mlmp.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-rqjj3j.png"
+    theme_mode = "auto"
 
 [weather]
 auto_locate = true
