@@ -98,6 +98,10 @@
       source = ./dotfiles/niri/config.d/close-or-tab.sh;
       force = true;
     };
+    "niri/noctalia.kdl" = {
+      source = ./dotfiles/niri/noctalia.kdl;
+      force = true;
+    };
     "my-scripts/startapps.sh" = {
       source = ./dotfiles/my-scripts/startapps.sh;
       force = true;

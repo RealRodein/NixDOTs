@@ -1,0 +1,10 @@
+// Noctalia uses layer-shell surfaces (not regular windows),
+// but this ensures xray is off if any component ever opens as
+// a regular xdg-toplevel window.
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    background-effect {
+        blur true
+        xray false
+    }
+}
