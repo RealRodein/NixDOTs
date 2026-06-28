@@ -7,32 +7,28 @@ order = [ "Main", "Bottom" ]
 
     [bar.Bottom]
     auto_hide = true
-    background_opacity = 0.4999999888241291
-    center = [ "session", "group:g1", "group:g2" ]
-    end = []
+    background_opacity = 0.29999999329447746
+    border = "primary"
+    border_width = 0.5
+    capsule_thickness = 0.74999998696148396
+    center = [ "session" ]
+    end = [ "group:g2" ]
     margin_edge = 0
-    margin_ends = 330
-    padding = 0
+    margin_ends = 390
+    padding = 15
     position = "right"
     radius = 19
     radius_bottom_right = 0
     radius_top_right = 0
     reserve_space = false
-    start = []
-    thickness = 60
-    widget_spacing = 13
-
-        [[bar.Bottom.capsule_group]]
-        fill = "surface_variant"
-        id = "g1"
-        members = [ "ram", "cpu", "network_rx", "network_tx" ]
-        opacity = 0.0
-        padding = 0.0
+    start = [ "output_volume", "wallpaper", "clipboard" ]
+    thickness = 40
+    widget_spacing = 11
 
         [[bar.Bottom.capsule_group]]
         fill = "surface_variant"
         id = "g2"
-        members = [ "screen_recorder", "caffeine", "screenshot", "clipboard", "bluetooth", "wallpaper" ]
+        members = [ "screenshot", "bluetooth", "sysmon" ]
         opacity = 0.0
         padding = 0.0
 
@@ -58,6 +54,18 @@ order = [ "Main", "Bottom" ]
 
 [control_center]
 sidebar = "full"
+
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "clipboard"
 
 [desktop_widgets]
 schema_version = 1
@@ -328,6 +336,10 @@ offset_x = 5
 offset_y = 0
 position = "bottom_left"
 
+    [osd.kinds]
+    lock_keys = false
+    power_profile = false
+
 [shell]
 font_family = "Inter"
 lang = "en"
@@ -361,37 +373,24 @@ gpu_poll_seconds = 10
 [theme]
 builtin = "Ayu"
 community_palette = "m3-content"
-custom_palette = "wallhaven-jev9xw-mut"
-mode = "auto"
-source = "wallpaper"
-wallpaper_scheme = "m3-content"
+custom_palette = "wallhaven-w5mlmp-mc"
+source = "custom"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
     community_ids = [ "zen-browser", "neovim", "discord", "steam", "yazi" ]
 
 [wallpaper]
-directory = "/home/rodein/Pictures/Wallpapers"
 fill_mode = "center"
 
     [wallpaper.default]
     path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-w5mlmp.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-9or96k.jpg"
-
-    [[wallpaper.favorite]]
-    palette_source = "wallpaper"
     path = "/home/rodein/Pictures/Wallpapers/wallhaven-w5mlmp.jpg"
-    theme_mode = "dark"
-    wallpaper_scheme = "m3-content"
-
-    [[wallpaper.favorite]]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-rqjj3j.png"
-    theme_mode = "auto"
 
 [weather]
 auto_locate = true
@@ -416,6 +415,7 @@ scale = 1.2
 
 [widget.cpu]
 display = "text"
+show_label = false
 stat = "cpu_temp"
 
 [widget.launcher]
@@ -441,18 +441,38 @@ show_label = false
 
 [widget.network_rx]
 display = "text"
-scale = 0.85000000000000009
+scale = 0.69999999999999996
 
 [widget.network_tx]
 display = "text"
-scale = 0.85000000000000009
+scale = 0.69999999999999996
+
+[widget.output_volume]
+show_label = false
+
+[widget.privacy]
+active_color = "on_tertiary"
+hide_inactive = true
+icon_spacing = 8
+inactive_color = "secondary"
+scale = 1.25
+
+[widget.ram]
+scale = 0.69999999999999996
 
 [widget.screen_recorder]
 script = "scripts/screen_recorder.lua"
 type = "scripted"
 
+[widget.screenshot]
+primary_click = "fullscreen"
+
 [widget.session]
-font_weight = 700
+anchor = true
+capsule = true
+capsule_opacity = 0.25
+capsule_padding = 17.0
+capsule_radius = 7
 scale = 1.55
 
 [widget.spacer_1]
@@ -460,10 +480,13 @@ length = 10
 type = "spacer"
 
 [widget.spacer_2]
+scale = 0.5
 type = "spacer"
 
 [widget.sysmon]
-stat = "net_rx"
+glyph = "activity"
+label_min_width = 200
+show_label = false
 
 [widget.tray]
 capsule = true
