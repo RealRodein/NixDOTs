@@ -42,7 +42,10 @@ window-rule {
 // Noctalia panels: disable xray so they stay opaque when inactive
 window-rule {
     match app-id="dev.noctalia.Noctalia"
-    background-effect { xray false }
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
 // Dim inactive windows

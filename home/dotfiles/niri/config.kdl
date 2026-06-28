@@ -7,5 +7,3 @@ include "./config.d/decorations.kdl"
 include "./config.d/autostart.kdl"
 include "./config.d/rules.kdl"
 include "./config.d/keybinds.kdl"
-
-include optional=true "./noctalia.kdl"
