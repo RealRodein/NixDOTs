@@ -38,7 +38,7 @@
     };
 
   # seccond drive
-  fileSystems."/mnt/blackhole" = 
+  fileSystems."/mnt/origin" = 
     { device = "/dev/disk/by-uuid/d5d14b6e-5752-4362-a648-3019d5377c66";
       fsType = "btrfs"; 
       options = [ "nofail" "defaults" ]; 

@@ -21,14 +21,13 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
   let
     system = "x86_64-linux";
-  in {
-    nixosConfigurations.eclipse = nixpkgs.lib.nixosSystem {
+    mkHost = hostPath: nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = { inherit inputs; };
 
       modules = [
-        ./hosts/eclipse
+        hostPath
 
         home-manager.nixosModules.home-manager
 
@@ -44,5 +43,8 @@
         }
       ];
     };
+  in {
+    nixosConfigurations.orbiter = mkHost ./hosts/orbiter;
+    nixosConfigurations.raijack = mkHost ./hosts/raijack;
   };
 }
