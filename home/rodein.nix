@@ -136,10 +136,12 @@
   '';
 
   home.activation.copyRogConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
-    if [ ! -f "$HOME/.config/rog/rog-control-center.cfg" ] || [ -L "$HOME/.config/rog/rog-control-center.cfg" ]; then
-      mkdir -p "$HOME/.config/rog"
-      cp -f "${./dotfiles/rog/rog-control-center.cfg}" "$HOME/.config/rog/rog-control-center.cfg"
-      chmod 644 "$HOME/.config/rog/rog-control-center.cfg"
+    if [ "$(hostname)" = "orbiter" ]; then
+      if [ ! -f "$HOME/.config/rog/rog-control-center.cfg" ] || [ -L "$HOME/.config/rog/rog-control-center.cfg" ]; then
+        mkdir -p "$HOME/.config/rog"
+        cp -f "${./dotfiles/rog/rog-control-center.cfg}" "$HOME/.config/rog/rog-control-center.cfg"
+        chmod 644 "$HOME/.config/rog/rog-control-center.cfg"
+      fi
     fi
   '';
 
