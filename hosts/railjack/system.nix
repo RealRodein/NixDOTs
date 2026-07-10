@@ -22,7 +22,7 @@
   ];
 
   # --- System ---
-  networking.hostName = "raijack";
+  networking.hostName = "railjack";
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Prague";
 

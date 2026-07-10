@@ -45,6 +45,6 @@
     };
   in {
     nixosConfigurations.orbiter = mkHost ./hosts/orbiter;
-    nixosConfigurations.raijack = mkHost ./hosts/raijack;
+    nixosConfigurations.railjack = mkHost ./hosts/railjack;
   };
 }
