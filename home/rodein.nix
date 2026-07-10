@@ -82,10 +82,7 @@
       source = ./dotfiles/niri/config.d/keybinds.kdl;
       force = true;
     };
-    "niri/config.d/outputs.kdl" = {
-      source = ./dotfiles/niri/config.d/outputs.kdl;
-      force = true;
-    };
+
     "niri/config.d/rules.kdl" = {
       source = ./dotfiles/niri/config.d/rules.kdl;
       force = true;
@@ -132,6 +129,16 @@
     fi
     if [ ! -L "$HOME/.local/state/noctalia/logos" ] && [ ! -d "$HOME/.local/state/noctalia/logos" ]; then
       ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/logos" "$HOME/.local/state/noctalia/logos"
+    fi
+  '';
+
+  home.activation.copyOutputsConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
+    HOST=$(hostname)
+    SRC="$HOME/NixDOTs/home/dotfiles/niri/config.d/outputs-$HOST.kdl"
+    DST="$HOME/.config/niri/config.d/outputs.kdl"
+    mkdir -p "$(dirname "$DST")"
+    if [ -f "$SRC" ]; then
+      cp -f "$SRC" "$DST"
     fi
   '';
 
