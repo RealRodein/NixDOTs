@@ -3,4 +3,4 @@ taskset -c 0-11 steam &
 vesktop &
 rog-control-center 
 
-# /home/rodein/Applications/miner/Twitch.AppImage --tray & disown
+~/Applications/miner/run.sh & disown
