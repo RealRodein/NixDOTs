@@ -21,6 +21,7 @@
     vesktop
     pavucontrol
     mpv
+    wineWow64Packages.waylandFull
     
     # CLI tools
     btop
