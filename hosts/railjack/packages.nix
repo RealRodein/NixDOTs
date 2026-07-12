@@ -22,13 +22,19 @@
     pavucontrol
     mpv
 
+    # File manager
+    thunar
+    thunar-volman
+    tumbler
+    file-roller
+
+    # Editor
+    zed-editor
+
     # CLI tools
     btop
     git
     p7zip
-    superfile
-    helix
-    micro
     neovim
     lazygit
 

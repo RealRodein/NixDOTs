@@ -47,7 +47,7 @@ binds {
     // Mod+O repeat=false { spawn "flatpak" "run" "md.obsidian.Obsidian"; } // not installed
 
     // added
-    Mod+E { spawn "ghostty" "-e" "yazi"; }
+    Mod+E hotkey-overlay-title="File Manager" { spawn "thunar"; }
 
     Mod+Q repeat=false { spawn-sh "~/.config/niri/config.d/close-or-tab.sh"; }
 
@@ -59,6 +59,7 @@ binds {
     Mod+Ctrl+Right { move-column-right; }
 
     Mod+L { spawn "noctalia" "msg" "screen-lock"; }
+    Mod+Shift+R hotkey-overlay-title="Reload Noctalia Config" { spawn "noctalia" "msg" "config-reload"; }
 
 
     // Alternative commands that move across workspaces when reaching

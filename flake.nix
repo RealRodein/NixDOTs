@@ -2,7 +2,7 @@
   description = "NixDOTs system";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -36,7 +36,10 @@
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = {
+              inherit inputs;
+              machineName = nixpkgs.lib.last (nixpkgs.lib.splitString "/" (toString hostPath));
+            };
 
             users.rodein = import ./home/rodein.nix;
           };

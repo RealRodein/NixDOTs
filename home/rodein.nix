@@ -1,10 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, machineName, ... }:
 
 {
   home.username = "rodein";
   home.homeDirectory = "/home/rodein";
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
 
@@ -63,78 +63,90 @@
 
   xdg.configFile = {
     "niri/config.kdl" = {
-      source = ./dotfiles/niri/config.kdl;
+      source = ./shared/niri/config.kdl;
       force = true;
     };
     "niri/config.d/autostart.kdl" = {
-      source = ./dotfiles/niri/config.d/autostart.kdl;
+      source = ./shared/niri/config.d/autostart.kdl;
       force = true;
     };
     "niri/config.d/decorations.kdl" = {
-      source = ./dotfiles/niri/config.d/decorations.kdl;
+      source = ./shared/niri/config.d/decorations.kdl;
       force = true;
     };
     "niri/config.d/devices.kdl" = {
-      source = ./dotfiles/niri/config.d/devices.kdl;
+      source = ./shared/niri/config.d/devices.kdl;
       force = true;
     };
     "niri/config.d/keybinds.kdl" = {
-      source = ./dotfiles/niri/config.d/keybinds.kdl;
+      source = ./shared/niri/config.d/keybinds.kdl;
       force = true;
     };
 
     "niri/config.d/rules.kdl" = {
-      source = ./dotfiles/niri/config.d/rules.kdl;
+      source = ./shared/niri/config.d/rules.kdl;
       force = true;
     };
     "niri/config.d/focus-or-spawn.sh" = {
-      source = ./dotfiles/niri/config.d/focus-or-spawn.sh;
+      source = ./shared/niri/config.d/focus-or-spawn.sh;
       force = true;
     };
     "niri/config.d/close-or-tab.sh" = {
-      source = ./dotfiles/niri/config.d/close-or-tab.sh;
+      source = ./shared/niri/config.d/close-or-tab.sh;
       force = true;
     };
     "my-scripts/startapps.sh" = {
-      source = ./dotfiles/my-scripts/startapps.sh;
+      source = ./shared/my-scripts/startapps.sh;
       force = true;
     };
 
     "my-scripts/toggles-power.sh" = {
-      source = ./dotfiles/my-scripts/toggles-power.sh;
+      source = ./shared/my-scripts/toggles-power.sh;
       force = true;
     };
     "my-scripts/toggles-save.sh" = {
-      source = ./dotfiles/my-scripts/toggles-save.sh;
+      source = ./shared/my-scripts/toggles-save.sh;
       force = true;
     };
-    "my-scripts/yazi-portal.sh".source = ./dotfiles/my-scripts/yazi-portal.sh;
-    "my-scripts/sync-flatpak-steam-icons.sh".source = ./dotfiles/my-scripts/sync-flatpak-steam-icons.sh;
+    "my-scripts/yazi-portal.sh".source = ./shared/my-scripts/yazi-portal.sh;
+    "my-scripts/sync-flatpak-steam-icons.sh".source = ./shared/my-scripts/sync-flatpak-steam-icons.sh;
 
-    "yazi/yazi.toml".source = ./dotfiles/yazi/yazi.toml;
-    "yazi/keymap.toml".source = ./dotfiles/yazi/keymap.toml;
-    "yazi/init.lua".source = ./dotfiles/yazi/init.lua;
-    "yazi/open-pdf-in-terminal.sh".source = ./dotfiles/yazi/open-pdf-in-terminal.sh;
-    "yazi/plugins/context-menu.yazi/main.lua".source = ./dotfiles/yazi/plugins/context-menu.yazi/main.lua;
+    "yazi/yazi.toml".source = ./shared/yazi/yazi.toml;
+    "yazi/keymap.toml".source = ./shared/yazi/keymap.toml;
+    "yazi/init.lua".source = ./shared/yazi/init.lua;
+    "yazi/open-pdf-in-terminal.sh".source = ./shared/yazi/open-pdf-in-terminal.sh;
+    "yazi/plugins/context-menu.yazi/main.lua".source = ./shared/yazi/plugins/context-menu.yazi/main.lua;
 
-    "ghostty/config.ghostty".source = ./dotfiles/ghostty/config.ghostty;
+    "ghostty/config.ghostty".source = ./shared/ghostty/config.ghostty;
 
-    "MangoHud/MangoHud.conf".source = ./dotfiles/mangohud/MangoHud.conf;
+    "zed/settings.json".source = ./shared/zed/settings.json;
+
+    "MangoHud/MangoHud.conf".source = ./shared/mangohud/MangoHud.conf;
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "thunar.desktop";
+    };
+    associations.added = {
+      "inode/directory" = "thunar.desktop";
+    };
   };
 
   home.activation.ensureNoctaliaSymlinks = config.lib.dag.entryAfter ["writeBoundary"] ''
     mkdir -p "$HOME/.local/state/noctalia"
     if [ ! -L "$HOME/.local/state/noctalia/settings.toml" ] && [ ! -e "$HOME/.local/state/noctalia/settings.toml" ]; then
-      ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
+      ln -s "$HOME/NixDOTs/home/${machineName}/dotfiles/noctalia/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
     fi
     if [ ! -L "$HOME/.local/state/noctalia/logos" ] && [ ! -d "$HOME/.local/state/noctalia/logos" ]; then
-      ln -s "$HOME/NixDOTs/home/dotfiles/noctalia/logos" "$HOME/.local/state/noctalia/logos"
+      ln -s "$HOME/NixDOTs/home/${machineName}/dotfiles/noctalia/logos" "$HOME/.local/state/noctalia/logos"
     fi
   '';
 
   home.activation.copyOutputsConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
-    HOST=$(hostname)
-    SRC="$HOME/NixDOTs/home/dotfiles/niri/config.d/outputs-$HOST.kdl"
+    HOST="${machineName}"
+    SRC="$HOME/NixDOTs/home/shared/niri/config.d/outputs-$HOST.kdl"
     DST="$HOME/.config/niri/config.d/outputs.kdl"
     mkdir -p "$(dirname "$DST")"
     if [ -f "$SRC" ]; then
@@ -143,10 +155,10 @@
   '';
 
   home.activation.copyRogConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
-    if [ "$(hostname)" = "orbiter" ]; then
+    if [ "${machineName}" = "orbiter" ]; then
       if [ ! -f "$HOME/.config/rog/rog-control-center.cfg" ] || [ -L "$HOME/.config/rog/rog-control-center.cfg" ]; then
         mkdir -p "$HOME/.config/rog"
-        cp -f "${./dotfiles/rog/rog-control-center.cfg}" "$HOME/.config/rog/rog-control-center.cfg"
+        cp -f "${./shared/rog/rog-control-center.cfg}" "$HOME/.config/rog/rog-control-center.cfg"
         chmod 644 "$HOME/.config/rog/rog-control-center.cfg"
       fi
     fi

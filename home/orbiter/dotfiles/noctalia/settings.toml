@@ -194,7 +194,6 @@ magnification = false
 main_axis_padding = 9
 margin_edge = 5
 padding = 1
-pinned = [ "zen-beta", "vesktop" ]
 radius = 14
 reserve_space = true
 show_dots = true
@@ -405,9 +404,6 @@ settings_show_advanced = true
 telemetry_enabled = true
 ui_scale = 0.85000000521540642
 
-    [shell.launcher]
-    app_grid = true
-
     [shell.panel]
     clipboard_placement = "floating"
     control_center_placement = "floating"
@@ -440,7 +436,7 @@ wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "niri" ]
-    community_ids = [ "zen-browser", "neovim", "zed", "discord", "steam", "yazi" ]
+    community_ids = [ "zen-browser", "neovim", "discord", "steam", "yazi" ]
 
 [wallpaper]
 fill_mode = "center"
