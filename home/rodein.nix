@@ -129,6 +129,9 @@
   };
 
   dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-enable-primary-paste = true;
+    };
     "org/nemo/preferences" = {
       default-folder-viewer = "list-view";
       show-full-path-titles = true;
