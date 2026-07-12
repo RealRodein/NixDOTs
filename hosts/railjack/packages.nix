@@ -21,6 +21,7 @@
     vesktop
     pavucontrol
     mpv
+    mpvpaper
 
     # File manager
     nemo

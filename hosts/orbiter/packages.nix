@@ -21,6 +21,7 @@
     vesktop
     pavucontrol
     mpv
+    mpvpaper
     wineWow64Packages.waylandFull
     
     # File manager
