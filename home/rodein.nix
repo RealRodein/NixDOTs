@@ -25,6 +25,7 @@
   };
 
   home.pointerCursor = {
+    enable = true;
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
     size = 24;
@@ -119,18 +120,34 @@
 
     "ghostty/config.ghostty".source = ./shared/ghostty/config.ghostty;
 
-    "zed/settings.json".source = ./shared/zed/settings.json;
+    "zed/settings.json" = {
+      source = ./shared/zed/settings.json;
+      force = true;
+    };
 
     "MangoHud/MangoHud.conf".source = ./shared/mangohud/MangoHud.conf;
+  };
+
+  dconf.settings = {
+    "org/nemo/preferences" = {
+      default-folder-viewer = "list-view";
+      show-full-path-titles = true;
+    };
+    "org/nemo/window-state" = {
+      start-with-sidebar = true;
+    };
+    "org/nemo/list-view" = {
+      default-zoom-level = "small";
+    };
   };
 
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = "thunar.desktop";
+      "inode/directory" = "nemo.desktop";
     };
     associations.added = {
-      "inode/directory" = "thunar.desktop";
+      "inode/directory" = "nemo.desktop";
     };
   };
 

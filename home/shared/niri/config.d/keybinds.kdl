@@ -20,7 +20,7 @@ binds {
     Mod+S hotkey-overlay-title="Steam" { spawn-sh "taskset -c 0-11 ~/.config/niri/config.d/focus-or-spawn.sh steam steam"; }
     Mod+D hotkey-overlay-title="Vesktop" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh vesktop vesktop"; }
     Mod+W hotkey-overlay-title="Zen Browser" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh zen zen"; }
-    // Mod+C { spawn "code"; } (not installed)
+    Mod+C hotkey-overlay-title="Zed Editor" { spawn-sh "~/.config/niri/config.d/focus-or-spawn.sh zed zed-editor"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -47,7 +47,7 @@ binds {
     // Mod+O repeat=false { spawn "flatpak" "run" "md.obsidian.Obsidian"; } // not installed
 
     // added
-    Mod+E hotkey-overlay-title="File Manager" { spawn "thunar"; }
+    Mod+E hotkey-overlay-title="File Manager" { spawn "nemo"; }
 
     Mod+Q repeat=false { spawn-sh "~/.config/niri/config.d/close-or-tab.sh"; }
 

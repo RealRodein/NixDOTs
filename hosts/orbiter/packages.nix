@@ -24,10 +24,7 @@
     wineWow64Packages.waylandFull
     
     # File manager
-    thunar
-    thunar-volman
-    tumbler
-    file-roller
+    nemo
 
     # Editor
     zed-editor

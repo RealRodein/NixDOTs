@@ -23,10 +23,7 @@
     mpv
 
     # File manager
-    thunar
-    thunar-volman
-    tumbler
-    file-roller
+    nemo
 
     # Editor
     zed-editor
