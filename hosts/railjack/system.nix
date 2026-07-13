@@ -39,24 +39,16 @@
   };
 
   # --- Display / Desktop ---
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "niri-session";
-      user = "rodein";
-    };
-  };
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
+  services.system76-scheduler.enable = true;
 
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
+      xdg-desktop-portal-cosmic
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
     ];
-    config.niri = {
-      default = [ "gnome" "gtk" ];
-      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-    };
   };
 
   services.xserver.xkb = {
@@ -100,12 +92,15 @@
   };
 
   # Force Full RGB on HDMI to fix washed-out colors
+  # Bind vfio-pci to the 1050 Ti so the host nvidia driver ignores it
+  # PCI IDs from `lspci -nn | grep -i nvidia` — update if yours differ
   boot.extraModprobeConfig = ''
     options nvidia NVreg_RegistryDwords="RMForceFullRangeRGB=1"
+    options vfio-pci ids=10de:1c82,10de:0fb9
   '';
 
   # --- Kernel ---
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # --- Power ---
   services.upower.enable = true;
