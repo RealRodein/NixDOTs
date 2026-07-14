@@ -318,9 +318,9 @@ widget_order = [
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
         background = true
         background_opacity = 0.54000000000000004
-        background_padding = 6.0
+        background_padding = 0
         background_radius = 18.0
-        shadow = false
+        shadow = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
     box_height = 128.0
@@ -332,14 +332,15 @@ widget_order = [
     type = "clock"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = true
         background_opacity = 0.45000000000000001
-        background_padding = 18.0
+        background_padding = 0
         background_radius = 18.0
         clock_style = "digital"
         format = "{:%H:%M:%S}"
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-    box_height = 256.0
+    box_height = 128.0
     box_width = 256.0
     cx = 960.0
     cy = 472.0
@@ -348,9 +349,10 @@ widget_order = [
     type = "sticker"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background = false
         background_opacity = 0.42999999999999999
         background_padding = 0.0
-        background_radius = 22.0
+        background_radius = 22
         image_path = "/home/rodein/Pictures/Wallpapers/pfp.jpg"
         opacity = 1.0
 
@@ -398,7 +400,7 @@ picker_position = "center_right"
 video_directory = "~/Pictures/Wallpapers"
 
 [plugins]
-enabled = [ "noctalia/mpvpaper" ]
+enabled = []
 
     [[plugins.source]]
     kind = "git"
@@ -455,13 +457,13 @@ wallpaper_scheme = "m3-content"
 fill_mode = "center"
 
     [wallpaper.default]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-yqv2wx.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-yqv2wx.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-yqv2wx.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-jev9xw.jpg"
 
     [[wallpaper.favorite]]
     path = "/home/rodein/Pictures/Wallpapers/wallhaven-pojl63.png"
