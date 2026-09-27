@@ -682,13 +682,13 @@ wallpaper_scheme = "m3-fruit-salad"
 directory = "/home/rodein/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gwmkpe.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gw2gyq.png"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gwmkpe.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gw2gyq.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gwmkpe.jpg"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gw2gyq.png"
 
 [weather]
 auto_locate = true
