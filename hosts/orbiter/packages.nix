@@ -28,6 +28,7 @@
     # Desktop
     ghostty
     yazi
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
 
     steam
     gamescope
