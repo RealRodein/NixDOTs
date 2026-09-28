@@ -83,7 +83,6 @@
         force = true;
       };
       "my-scripts/sync-flatpak-steam-icons.sh".source = ./shared/my-scripts/sync-flatpak-steam-icons.sh;
-      "my-scripts/vm-usb-toggle.sh".source = ./shared/my-scripts/vm-usb-toggle.sh;
 
       "yazi/yazi.toml".source = ./shared/yazi/yazi.toml;
       "yazi/keymap.toml".source = ./shared/yazi/keymap.toml;

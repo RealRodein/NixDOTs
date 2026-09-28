@@ -92,51 +92,6 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Passwordless libvirt control for the vm-usb-toggle hotkey script.
-  # Scope limited to virsh so the user can attach/detach USB devices to the
-  # Windows VM without a password prompt.
-  security.sudo.extraRules = [
-    {
-      groups = [ "wheel" ];
-      commands = [
-        { command = "/run/current-system/sw/bin/virsh"; options = [ "NOPASSWD" ]; }
-      ];
-    }
-  ];
-
-  # ── Case power button as "toggle VM input" trigger ──────────────────
-  # Short power-press toggles BOTH USB devices (keyboard + mouse) into or out
-  # of the VM together; long-press still powers off. This works even when the
-  # VM has taken over the keyboard, because the power button is hardware-driven.
-  services.logind.settings = {
-    Login = {
-      HandlePowerKey = "ignore";
-      HandlePowerKeyLongPress = "poweroff";
-    };
-  };
-
-  services.acpid = {
-    enable = true;
-    powerEventCommands = ''
-      # acpid runs commands with a minimal PATH, so the script's
-      # `#!/usr/bin/env bash` would fail ("bash: No such file or directory").
-      # Invoke it through an absolute bash path instead.
-      ${pkgs.bash}/bin/bash /etc/vm-usb-toggle-both.sh
-      /run/current-system/sw/bin/logger -t vm-power-btn "power button pressed"
-    '';
-  };
-
-  # Address-independent USB hostdev snippets + the toggle script used by the
-  # power-button action (installed under /etc so root/acpid can reach them).
-  environment.etc = {
-    "vm-usb-keyboard.xml".source = ./vm-usb-keyboard.xml;
-    "vm-usb-mouse.xml".source = ./vm-usb-mouse.xml;
-    "vm-usb-toggle-both.sh" = {
-      source = ../../home/shared/my-scripts/vm-usb-toggle-both.sh;
-      mode = "0755";
-    };
-  };
-
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
@@ -164,6 +119,15 @@
   boot.extraModprobeConfig = ''
     options nvidia NVreg_RegistryDwords="RMForceFullRangeRGB=1"
   '';
+
+  # --- Frame generation ---
+  # lsfg-vk: Lossless Scaling's frame generation as a Vulkan implicit layer,
+  # active per-app with ENABLE_LSFG=1 (or a profile in ~/.config/lsfg-vk/conf.toml).
+  # Requires Lossless Scaling (paid) installed in Steam for the model DLL.
+  services.lsfg-vk = {
+    enable = true;
+    ui.enable = true;
+  };
 
   # --- Kernel ---
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;

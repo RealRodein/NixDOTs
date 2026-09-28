@@ -29,6 +29,10 @@
     neovim
     lazygit
 
+    # Disk tooling (sgdisk/parted/partprobe)
+    gptfdisk
+    parted
+
     wtype
     jq
 
@@ -36,11 +40,6 @@
     dotnet-runtime_10
     unzip
     rpm
-
-    # VM / VFIO
-    looking-glass-client
-    swtpm
-    virt-viewer
 
     # Custom
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default

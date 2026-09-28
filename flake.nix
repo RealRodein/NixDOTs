@@ -16,12 +16,18 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Lossless Scaling frame generation (Vulkan layer) – needs Lossless Scaling bought on Steam
+    lsfg-vk = {
+      url = "github:pabloaul/lsfg-vk-flake/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, lsfg-vk, ... }:
   let
     system = "x86_64-linux";
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager inputs; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager lsfg-vk inputs; };
   in {
     nixosConfigurations.orbiter = mkHost { inherit system; hostPath = ./hosts/orbiter; };
     nixosConfigurations.railjack = mkHost { inherit system; hostPath = ./hosts/railjack; };

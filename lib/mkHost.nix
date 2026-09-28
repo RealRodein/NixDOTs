@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, inputs }:
+{ nixpkgs, home-manager, lsfg-vk, inputs }:
 
 { system, hostPath }:
 nixpkgs.lib.nixosSystem {
@@ -10,6 +10,7 @@ nixpkgs.lib.nixosSystem {
     hostPath
 
     home-manager.nixosModules.home-manager
+    lsfg-vk.nixosModules.default
 
     {
       home-manager = {

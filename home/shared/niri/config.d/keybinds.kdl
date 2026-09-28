@@ -49,10 +49,6 @@ binds {
     // added
     Mod+E hotkey-overlay-title="File Manager" { spawn "nemo"; }
 
-    // Toggle USB devices between host and Windows VM (see my-scripts/vm-usb-toggle.sh)
-    Mod+F5 hotkey-overlay-title="Toggle VM Keyboard" { spawn-sh "~/.config/my-scripts/vm-usb-toggle.sh windows 0518:1115"; }
-    Mod+F6 hotkey-overlay-title="Toggle VM Mouse" { spawn-sh "~/.config/my-scripts/vm-usb-toggle.sh windows 046d:c548"; }
-
     Mod+Q repeat=false { spawn-sh "~/.config/niri/config.d/close-or-tab.sh"; }
 
     Mod+Left  { focus-column-left; }

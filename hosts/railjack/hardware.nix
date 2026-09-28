@@ -43,15 +43,8 @@
       options = [ "nofail" "defaults" "uid=1000" "gid=1000" ];
     };
 
-  # VM storage – label "duviri"
-  fileSystems."/var/lib/libvirt/images/duviri" =
-    { device = "/dev/disk/by-uuid/8794bdbb-ea24-4846-b5dd-cae8f4b3300b";
-      fsType = "ext4";
-      options = [ "nofail" "defaults" ];
-    };
-
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/0185f74a-5e4f-48d4-a8db-0e1429425518"; }
+    [ { device = "/dev/disk/by-uuid/1d586868-355a-4521-af01-8e2238773a4d"; }
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
