@@ -101,6 +101,14 @@
       };
 
       "MangoHud/MangoHud.conf".source = ./shared/mangohud/MangoHud.conf;
+
+      # Firefox-family browsers (Zen) and Vesktop register themselves in
+      # ~/.config/mimeapps.list as soon as they start, which replaces the managed
+      # symlink and aborts the next activation. force = true keeps the managed
+      # copy authoritative; the generated file itself comes from xdg.mimeApps.
+      "mimeapps.list" = {
+        force = true;
+      };
     }
     (lib.mkIf (machineName == "orbiter") {
       "niri/config.kdl" = {
@@ -151,42 +159,74 @@
       };
     })
     (lib.mkIf (machineName == "railjack") {
+      # Plasma / KDE. All of these are rewritten by Plasma, KDE or the app
+      # itself (GTK, fontconfig, kglobalaccel, ...), so they need force = true:
+      # without it Home Manager's collision check aborts the whole activation and
+      # nothing at all gets applied.
       "kglobalshortcutsrc" = {
         source = ./shared/kde/kglobalshortcutsrc;
         force = true;
       };
+      "kdeglobals" = {
+        source = ./shared/kde/kdeglobals;
+        force = true;
+      };
+      "plasmanotifyrc" = {
+        source = ./shared/kde/plasmanotifyrc;
+        force = true;
+      };
+      "plasma-org.kde.plasma.desktop-appletsrc" = {
+        source = ./railjack/dotfiles/plasma/desktop-appletsrc;
+        force = true;
+      };
+      "fontconfig/conf.d/10-hm-fonts.conf" = {
+        force = true;
+      };
+      "systemd/user/drkonqi-coredump-launcher.socket".source =
+        config.lib.file.mkOutOfStoreSymlink /dev/null;
+      "systemd/user/drkonqi-coredump-launcher@.service".source =
+        config.lib.file.mkOutOfStoreSymlink /dev/null;
+      "systemd/user/drkonqi-coredump-pickup.service".source =
+        config.lib.file.mkOutOfStoreSymlink /dev/null;
+      "systemd/user/drkonqi-sentry-postman.path".source =
+        config.lib.file.mkOutOfStoreSymlink /dev/null;
+      "systemd/user/drkonqi-sentry-postman.service".source =
+        config.lib.file.mkOutOfStoreSymlink /dev/null;
+      "systemd/user/drkonqi-sentry-postman.timer".source =
+        config.lib.file.mkOutOfStoreSymlink /dev/null;
     })
   ];
 
+  # GTK2 apps (and anything going through the GTK2 theme engine) read
+  # ~/.gtkrc-2.0, which the GTK libraries rewrite whenever a theme is picked in
+  # their own settings dialog. That clobbered the symlink and made the Home
+  # Manager activation fail, so the file has to be force-overwritten.
+  gtk.gtk2.force = lib.mkIf (machineName == "railjack") true;
+
   home.file = lib.mkIf (machineName == "railjack") {
-    ".var/app/org.vinegarhq.Sober/config/sober/config.json" = {
-      source = ./shared/sober/config.json;
+    # Hidden service entries (NoDisplay) for the Spectacle screenshot bindings in
+    # kglobalshortcutsrc. Application launches themselves use the real .desktop
+    # ids, so they need no shims at all.
+    ".local/share/applications/kde-screenshot-region.desktop" = {
+      source = ./shared/kde/applications/kde-screenshot-region.desktop;
       force = true;
     };
-    ".local/share/applications/launch-ghostty.desktop" = {
-      source = ./shared/kde/applications/launch-ghostty.desktop;
+    ".local/share/applications/kde-screenshot-screen.desktop" = {
+      source = ./shared/kde/applications/kde-screenshot-screen.desktop;
       force = true;
     };
-    ".local/share/applications/launch-zen.desktop" = {
-      source = ./shared/kde/applications/launch-zen.desktop;
+    ".local/share/applications/kde-screenshot-window.desktop" = {
+      source = ./shared/kde/applications/kde-screenshot-window.desktop;
       force = true;
     };
-    ".local/share/applications/launch-nemo.desktop" = {
-      source = ./shared/kde/applications/launch-nemo.desktop;
-      force = true;
-    };
-    ".local/share/applications/launch-steam.desktop" = {
-      source = ./shared/kde/applications/launch-steam.desktop;
-      force = true;
-    };
-    ".local/share/applications/launch-vesktop.desktop" = {
-      source = ./shared/kde/applications/launch-vesktop.desktop;
-      force = true;
-    };
-    ".local/share/applications/launch-zed.desktop" = {
-      source = ./shared/kde/applications/launch-zed.desktop;
-      force = true;
-    };
+  };
+
+  # Ghostty is the terminal of this machine, so it has to answer the
+  # XDG Terminal Execution spec for anything that asks for "the default terminal"
+  # (file managers, portals, Flatpak apps).
+  xdg.terminal-exec = lib.mkIf (machineName == "railjack") {
+    enable = true;
+    settings.default = [ "com.mitchellh.ghostty.desktop" ];
   };
 
   dconf.settings = {
@@ -195,15 +235,42 @@
     };
   };
 
+  # Directory default: Thunar on orbiter, Nemo on the Plasma host.
   xdg.mimeApps = {
     enable = true;
-    defaultApplications = {
-      "inode/directory" = "thunar.desktop";
-    };
+    defaultApplications."inode/directory" =
+      if machineName == "orbiter" then "thunar.desktop" else "nemo.desktop";
     associations.added = {
-      "inode/directory" = "thunar.desktop";
+      "inode/directory" =
+        if machineName == "orbiter" then "thunar.desktop" else "nemo.desktop";
+
+      # Zen and Vesktop register these themselves the first time they run, which
+      # is what wrote the previous live mimeapps.list. Declaring them keeps the
+      # associations in place right after an activation instead of waiting for the
+      # next browser start.
+      "x-scheme-handler/http" = "zen-beta.desktop";
+      "x-scheme-handler/https" = "zen-beta.desktop";
+      "x-scheme-handler/chrome" = "zen-beta.desktop";
+      "x-scheme-handler/discord" = "vesktop.desktop";
+      "text/html" = "zen-beta.desktop";
+      "application/x-extension-htm" = "zen-beta.desktop";
+      "application/x-extension-html" = "zen-beta.desktop";
+      "application/x-extension-shtml" = "zen-beta.desktop";
+      "application/xhtml+xml" = "zen-beta.desktop";
+      "application/x-extension-xhtml" = "zen-beta.desktop";
+      "application/x-extension-xht" = "zen-beta.desktop";
     };
   };
+
+  # KGlobalAccel reads ~/.config/kglobalshortcutsrc once, when
+  # plasma-kglobalaccel starts. Home Manager now activates at login, which can
+  # happen after that daemon has already read the file, so give it a nudge to
+  # re-read the managed version.
+  home.activation.reloadKGlobalAccel = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    if [ "${machineName}" = "railjack" ]; then
+      systemctl --user try-restart plasma-kglobalaccel.service 2>/dev/null || true
+    fi
+  '';
 
   home.activation.ensureNoctaliaSymlinks = config.lib.dag.entryAfter ["writeBoundary"] ''
     if [ "${machineName}" = "orbiter" ]; then
