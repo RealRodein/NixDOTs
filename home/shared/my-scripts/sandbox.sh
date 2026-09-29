@@ -94,7 +94,7 @@ JUNK_EXE_PATTERNS=(
 )
 
 find_candidate_exe() {
-  local args=(find "$1" -maxdepth "$2" -type f -iname '*.exe')
+  local args=(find "$1" -maxdepth "$2" -type f \( -iname '*.exe' -o -iname '*.x86_64' -o -iname '*.x86' -o -iname '*.linux' -o -iname '*.elf' -o -iname '*.run' -o -iname '*.appimage' -o -perm -u+x \))
   for pat in "${JUNK_EXE_PATTERNS[@]}"; do
     args+=(-not -iname "$pat")
   done
