@@ -19,13 +19,20 @@
   # pops up the DrKonqi window. Detach it from systemd-coredump@ so no window is
   # ever shown (crashes stay in the journal / coredumpctl). The matching user
   # units are masked from the Home Manager config.
+  #
+  # enable = false makes NixOS emit a real unit mask, not just "not enabled":
+  # systemd-lib.nix turns a disabled service into a /dev/null symlink, so
+  # /etc/systemd/system/drkonqi-coredump-processor@.service becomes -> /dev/null
+  # and systemd-coredump@.service.wants can no longer start it. The user-side
+  # /dev/null symlinks in home/rodein.nix mask the same way.
   systemd.services."drkonqi-coredump-processor@" = {
     enable = false;
     wantedBy = [ ];
   };
 
-  # --- Debugging ---
-  # Crash logs for the suspend/resume investigation. Temporary: drop this once
-  # the resume crash is understood.
-  environment.sessionVariables.KDE_DEBUG = "1";
+  # Verified after a rebuild, and worth re-checking after a Plasma upgrade:
+  #   systemctl list-unit-files '*drkonqi*'   # drkonqi-coredump-processor@ masked
+  #   systemctl --user list-unit-files '*drkonqi*'
+  #   pgrep -a drkonqi                        # no output
+  #   coredumpctl list                        # still records crashes
 }

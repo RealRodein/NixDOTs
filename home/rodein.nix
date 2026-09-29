@@ -265,10 +265,21 @@
   # KGlobalAccel reads ~/.config/kglobalshortcutsrc once, when
   # plasma-kglobalaccel starts. Home Manager now activates at login, which can
   # happen after that daemon has already read the file, so give it a nudge to
-  # re-read the managed version.
+  # re-read the managed version. The nudge is skipped unless the file's content
+  # actually changed since the last successful activation, so an unrelated
+  # rebuild no longer interrupts shortcut handling for nothing.
   home.activation.reloadKGlobalAccel = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     if [ "${machineName}" = "railjack" ]; then
-      systemctl --user try-restart plasma-kglobalaccel.service 2>/dev/null || true
+      shortcuts="$HOME/.config/kglobalshortcutsrc"
+      stamp="$HOME/.local/state/nixdots/kglobalshortcutsrc.sum"
+      if [ -f "$shortcuts" ]; then
+        current=$(sha256sum < "$shortcuts" | cut -d" " -f1)
+        if [ "$current" != "$(cat "$stamp" 2>/dev/null)" ]; then
+          mkdir -p "$(dirname "$stamp")"
+          printf '%s\n' "$current" > "$stamp"
+          systemctl --user try-restart plasma-kglobalaccel.service 2>/dev/null || true
+        fi
+      fi
     fi
   '';
 
