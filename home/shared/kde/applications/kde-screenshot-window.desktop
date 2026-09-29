@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot (window)
+Comment=Capture the active window with Spectacle
+Exec=spectacle --background --activewindow
+Icon=edit-copy
+Terminal=false
+StartupNotify=false
+NoDisplay=true

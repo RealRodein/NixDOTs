@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot (region)
+Comment=Capture a region of the screen with Spectacle
+Exec=spectacle --background --region
+Icon=edit-copy
+Terminal=false
+StartupNotify=false
+NoDisplay=true
