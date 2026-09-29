@@ -49,13 +49,12 @@
     dolphin-plugins
     baloo-widgets
 
-    # Editor / documents / image / archive / screenshot
+    # Editor / documents / image / archive
     kate
     ktexteditor
     khelpcenter
     okular
     gwenview
-    spectacle
     ark
 
     # Multimedia
@@ -102,7 +101,10 @@
   # (implicit 'strncpy' declaration removed), so pin the fixed 595.99.02 driver.
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    # Runtime PM (and with it the suspend/resume paths) is off by default in this
+    # driver config, which leaves the GPU powered across suspend and makes the
+    # resume fail with a lost video-memory allocation.
+    powerManagement.enable = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
