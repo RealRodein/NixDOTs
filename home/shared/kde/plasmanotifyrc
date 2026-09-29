@@ -1,0 +1,5 @@
+[Notifications]
+PopupPosition=BottomRight
+
+[Applications][vesktop]
+Seen=true
