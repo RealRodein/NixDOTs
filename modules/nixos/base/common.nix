@@ -37,6 +37,7 @@
     localNetworkGameTransfers.openFirewall = true;
     dedicatedServer.openFirewall = true;
     package = pkgs.steam.override { extraArgs = "-cef-disable-gpu-compositing"; };
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
   services.upower.enable = true;
