@@ -625,6 +625,7 @@ avatar_path = "/home/rodein/Pictures/Wallpapers/pfp.jpg"
 corner_radius_scale = 1.1000000163912773
 font_family = "JetBrainsMono Nerd Font Mono"
 lang = "en"
+niri_overview_type_to_launch_enabled = true
 settings_show_advanced = true
 telemetry_enabled = true
 ui_scale = 0.85000000521540642
@@ -682,13 +683,13 @@ wallpaper_scheme = "m3-fruit-salad"
 directory = "/home/rodein/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gw2gyq.png"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-8gr6l2.jpg"
 
     [wallpaper.last]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gw2gyq.png"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-8gr6l2.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/rodein/Pictures/Wallpapers/wallhaven-gw2gyq.png"
+    path = "/home/rodein/Pictures/Wallpapers/wallhaven-8gr6l2.jpg"
 
 [weather]
 auto_locate = true
