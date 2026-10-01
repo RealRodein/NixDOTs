@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # --- Boot ---
@@ -35,51 +35,45 @@
   # networks that actually provide it.
   networking.getaddrinfo.precedence."::ffff:0:0/96" = 100;
 
+  # --- Locale / Region ---
+  # NixOS has no /etc/locale.gen, so locales only exist if declared here.
+  # Only en_US.UTF-8 existed before, which left the desktop's "Region &
+  # Language" settings page with nothing to offer.
+  i18n = {
+    defaultLocale = "cs_CZ.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "cs_CZ.UTF-8";
+      LC_NUMERIC = "cs_CZ.UTF-8";
+      LC_MONETARY = "cs_CZ.UTF-8";
+      LC_PAPER = "cs_CZ.UTF-8";
+      LC_MEASUREMENT = "cs_CZ.UTF-8";
+      LC_TELEPHONE = "cs_CZ.UTF-8";
+    };
+  };
+
   # --- Display / Desktop ---
-  # Minimal KDE Plasma 6: core shell only, default apps stripped.
-  # The plasma6 module already enables SDDM and sets defaultSession = "plasma",
-  # as well as the KDE portals (so no manual xdg.portal setup is needed here).
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # The COSMIC session, its greeter and the matching xdg-desktop-portal-cosmic
+  # backend live in ./cosmic.nix. There is no X server on this machine:
+  # cosmic-comp runs its own XWayland for X11 clients.
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    # Terminal / file manager (we use ghostty + nemo instead)
-    konsole
-    dolphin
-    dolphin-plugins
-    baloo-widgets
-
-    # Editor / documents / image / archive
-    kate
-    ktexteditor
-    khelpcenter
-    okular
-    gwenview
-    ark
-
-    # Multimedia
-    elisa
-    ffmpegthumbs
-
-    # Remote desktop
-    krdp
-
-    # App store (would be pulled in by Flatpak) & browser integration
-    discover
-    plasma-browser-integration
-
-    # Look-and-feel extras & touch keyboard (unneeded on desktop)
-    aurorae
-    plasma-workspace-wallpapers
-    plasma-keyboard
-    qtvirtualkeyboard
-  ];
-
-  # Trim module-enabled extras we don't need on this box.
-  programs.kde-pim.enable = false;        # Kontact/KMail/Akonadi PIM stack
   services.orca.enable = false;           # screen reader
-  services.geoclue2.enable = false;       # location service
   services.fwupd.enable = false;          # firmware update daemon
+
+  # --- Swap ---
+  # This box has 15 GiB of RAM, 12 cores and no swap, so Nix defaults to 12
+  # parallel build jobs and any large compile (cosmic, the nvidia driver)
+  # drives the box into a global OOM. The kernel then picks victims at random -
+  # it took out nix mid-rebuild, vesktop, ghostty, pipewire and dbus-broker -
+  # which is what the desktop surfaces as "the system is killing apps to protect
+  # the kernel". 8 GiB is enough to let a build oversubscribe instead of dying.
+  systemd.tmpfiles.rules = [ "d /var/swap 0777 root root - " ];
+  swapDevices = [
+    {
+      device = "/var/swap/swapfile";
+      size = 8192; # MiB
+      priority = 10;
+    }
+  ];
 
   services.system76-scheduler.enable = true;
 

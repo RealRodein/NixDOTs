@@ -159,41 +159,21 @@
       };
     })
     (lib.mkIf (machineName == "railjack") {
-      # Plasma / KDE. All of these are rewritten by Plasma, KDE or the app
-      # itself (GTK, fontconfig, kglobalaccel, ...), so they need force = true:
-      # without it Home Manager's collision check aborts the whole activation and
-      # nothing at all gets applied.
-      "kglobalshortcutsrc" = {
-        source = ./shared/kde/kglobalshortcutsrc;
-        force = true;
-      };
-      "kdeglobals" = {
-        source = ./shared/kde/kdeglobals;
-        force = true;
-      };
-      "plasmanotifyrc" = {
-        source = ./shared/kde/plasmanotifyrc;
-        force = true;
-      };
-      "plasma-org.kde.plasma.desktop-appletsrc" = {
-        source = ./railjack/dotfiles/plasma/desktop-appletsrc;
-        force = true;
-      };
+      # fontconfig rewrites its own conf.d entries whenever the cache is
+      # refreshed, which collides with the one Home Manager links in. Force it
+      # so the activation cannot abort on an unrelated font change.
       "fontconfig/conf.d/10-hm-fonts.conf" = {
         force = true;
       };
-      "systemd/user/drkonqi-coredump-launcher.socket".source =
-        config.lib.file.mkOutOfStoreSymlink /dev/null;
-      "systemd/user/drkonqi-coredump-launcher@.service".source =
-        config.lib.file.mkOutOfStoreSymlink /dev/null;
-      "systemd/user/drkonqi-coredump-pickup.service".source =
-        config.lib.file.mkOutOfStoreSymlink /dev/null;
-      "systemd/user/drkonqi-sentry-postman.path".source =
-        config.lib.file.mkOutOfStoreSymlink /dev/null;
-      "systemd/user/drkonqi-sentry-postman.service".source =
-        config.lib.file.mkOutOfStoreSymlink /dev/null;
-      "systemd/user/drkonqi-sentry-postman.timer".source =
-        config.lib.file.mkOutOfStoreSymlink /dev/null;
+    })
+  ];
+
+  home.file = lib.mkMerge [
+    (lib.mkIf (machineName == "railjack") {
+      ".local/share/icons/hicolor/scalable/apps/com.system76.CosmicPanelLauncherButton.svg".source =
+        ./orbiter/dotfiles/noctalia/logos/nix-snowflake-white.svg;
+      ".local/share/icons/hicolor/scalable/apps/com.system76.CosmicLauncher.svg".source =
+        ./orbiter/dotfiles/noctalia/logos/nix-snowflake-white.svg;
     })
   ];
 
@@ -202,24 +182,6 @@
   # their own settings dialog. That clobbered the symlink and made the Home
   # Manager activation fail, so the file has to be force-overwritten.
   gtk.gtk2.force = lib.mkIf (machineName == "railjack") true;
-
-  home.file = lib.mkIf (machineName == "railjack") {
-    # Hidden service entries (NoDisplay) for the Spectacle screenshot bindings in
-    # kglobalshortcutsrc. Application launches themselves use the real .desktop
-    # ids, so they need no shims at all.
-    ".local/share/applications/kde-screenshot-region.desktop" = {
-      source = ./shared/kde/applications/kde-screenshot-region.desktop;
-      force = true;
-    };
-    ".local/share/applications/kde-screenshot-screen.desktop" = {
-      source = ./shared/kde/applications/kde-screenshot-screen.desktop;
-      force = true;
-    };
-    ".local/share/applications/kde-screenshot-window.desktop" = {
-      source = ./shared/kde/applications/kde-screenshot-window.desktop;
-      force = true;
-    };
-  };
 
   # Ghostty is the terminal of this machine, so it has to answer the
   # XDG Terminal Execution spec for anything that asks for "the default terminal"
@@ -235,14 +197,14 @@
     };
   };
 
-  # Directory default: Thunar on orbiter, Nemo on the Plasma host.
+  # Directory default: Thunar on orbiter, COSMIC Files on railjack.
   xdg.mimeApps = {
     enable = true;
     defaultApplications."inode/directory" =
-      if machineName == "orbiter" then "thunar.desktop" else "nemo.desktop";
+      if machineName == "orbiter" then "thunar.desktop" else "com.system76.CosmicFiles.desktop";
     associations.added = {
       "inode/directory" =
-        if machineName == "orbiter" then "thunar.desktop" else "nemo.desktop";
+        if machineName == "orbiter" then "thunar.desktop" else "com.system76.CosmicFiles.desktop";
 
       # Zen and Vesktop register these themselves the first time they run, which
       # is what wrote the previous live mimeapps.list. Declaring them keeps the
@@ -262,29 +224,12 @@
     };
   };
 
-  # KGlobalAccel reads ~/.config/kglobalshortcutsrc once, when
-  # plasma-kglobalaccel starts. Home Manager now activates at login, which can
-  # happen after that daemon has already read the file, so give it a nudge to
-  # re-read the managed version. The nudge is skipped unless the file's content
-  # actually changed since the last successful activation, so an unrelated
-  # rebuild no longer interrupts shortcut handling for nothing.
-  home.activation.reloadKGlobalAccel = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    if [ "${machineName}" = "railjack" ]; then
-      shortcuts="$HOME/.config/kglobalshortcutsrc"
-      stamp="$HOME/.local/state/nixdots/kglobalshortcutsrc.sum"
-      if [ -f "$shortcuts" ]; then
-        current=$(sha256sum < "$shortcuts" | cut -d" " -f1)
-        if [ "$current" != "$(cat "$stamp" 2>/dev/null)" ]; then
-          mkdir -p "$(dirname "$stamp")"
-          printf '%s\n' "$current" > "$stamp"
-          systemctl --user try-restart plasma-kglobalaccel.service 2>/dev/null || true
-        fi
-      fi
-    fi
-  '';
-
-  home.activation.ensureNoctaliaSymlinks = config.lib.dag.entryAfter ["writeBoundary"] ''
-    if [ "${machineName}" = "orbiter" ]; then
+  # Noctalia keeps its state under ~/.local/state, not ~/.config, so it is
+  # symlinked into the repo instead of being declared as an xdg.configFile.
+  # Only orbiter runs a Noctalia shell (under niri), and it owns
+  # home/orbiter/dotfiles/noctalia.
+  home.activation.ensureNoctaliaSymlinks = lib.mkIf (machineName == "orbiter") (
+    config.lib.dag.entryAfter [ "writeBoundary" ] ''
       DOTS="$HOME/nixdots/home/${machineName}/dotfiles/noctalia"
       mkdir -p "$HOME/.local/state/noctalia"
 
@@ -300,8 +245,8 @@
 
       link "$DOTS/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
       link "$DOTS/logos" "$HOME/.local/state/noctalia/logos"
-    fi
-  '';
+    ''
+  );
 
   home.activation.copyOutputsConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
     if [ "${machineName}" = "orbiter" ]; then

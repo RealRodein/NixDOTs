@@ -8,7 +8,7 @@
 
     ./hardware.nix
     ./system.nix
-    ./plasma.nix
+    ./cosmic.nix
     ./users.nix
     ./packages.nix
   ];

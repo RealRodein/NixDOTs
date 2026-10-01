@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Screenshot (screen)
-Comment=Capture the whole screen with Spectacle
-Exec=spectacle --background --fullscreen
-Icon=edit-copy
-Terminal=false
-StartupNotify=false
-NoDisplay=true

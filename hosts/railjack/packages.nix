@@ -9,15 +9,11 @@
     gamescope
     mangohud
     xwayland
-    xwayland-satellite
     vesktop
     pavucontrol
     openrgb
     mpv
     mpvpaper
-
-    # File manager
-    nemo
 
     # Editor
     zed-editor

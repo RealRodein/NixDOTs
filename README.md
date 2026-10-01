@@ -11,6 +11,7 @@ This flake is organized by host entrypoints under `hosts/<hostname>/`, with reus
 - `modules/nixos/packages/common.nix` - shared package-layer settings (AppImage, overlays, nixpkgs flags)
 - `modules/nixos/users/rodein-base.nix` - shared base user definition
 - `modules/nixos/desktop/noctalia.nix` - orbiter desktop + Noctalia live-edit entrypoint
+- `hosts/railjack/cosmic.nix` - railjack desktop (COSMIC session + cosmic-greeter, i.e. greetd)
 
 ## Rebuild current host
 
