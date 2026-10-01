@@ -1,7 +1,42 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   # Enable the COSMIC Desktop Environment module
+  # Use unstable COSMIC packages
+  nixpkgs.overlays = [
+    (_: prev: let
+      up = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system};
+    in {
+      inherit (up)
+        cosmic-session
+        cosmic-greeter
+        cosmic-applets
+        cosmic-applibrary
+        cosmic-bg
+        cosmic-comp
+        cosmic-files
+        cosmic-idle
+        cosmic-initial-setup
+        cosmic-launcher
+        cosmic-notifications
+        cosmic-osd
+        cosmic-panel
+        cosmic-settings
+        cosmic-settings-daemon
+        cosmic-workspaces-epoch
+        cosmic-edit
+        cosmic-icons
+        cosmic-player
+        cosmic-randr
+        cosmic-reader
+        cosmic-screenshot
+        cosmic-term
+        cosmic-wallpapers
+        cosmic-store
+        xdg-desktop-portal-cosmic;
+    })
+  ];
+
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
 
