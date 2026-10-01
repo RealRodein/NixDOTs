@@ -53,7 +53,7 @@
     # CLI tools
     btop
     git
-    p7zip
+    unar
     neovim
     lazygit
     python3
