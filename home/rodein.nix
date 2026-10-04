@@ -153,7 +153,7 @@
       "systemd/user/niri.service.d/ld-library-path.conf" = {
         text = ''
           [Service]
-          Environment=LD_LIBRARY_PATH=${pkgs.gcc.cc.lib}/lib:${pkgs.zlib}/lib
+          Environment=LD_LIBRARY_PATH=/nix/store/0c857z3y2kwn0dyaqp6f5mqwnbj49cvj-gcc-15.2.0-lib/lib:${pkgs.zlib}/lib
         '';
         force = true;
       };
