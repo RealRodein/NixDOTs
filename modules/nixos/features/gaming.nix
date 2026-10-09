@@ -12,6 +12,8 @@
 
   programs.gamemode.enable = true;
 
+  networking.firewall.allowedUDPPorts = [ 4950 4955 ]; # Warframe peer-to-peer
+
   environment.systemPackages = with pkgs; [
     gamescope
     mangohud

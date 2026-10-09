@@ -10,8 +10,10 @@
     # Orbiter live desktop module (Noctalia/Niri).
     ../../modules/nixos/desktop/noctalia.nix
 
+    # Shared feature modules.
+    ../../modules/nixos/features/gaming.nix
+
     # Host-local modules (keep hardware local to host).
-    ./gaming.nix
     ./hardware.nix
     ./system.nix
     ./users.nix

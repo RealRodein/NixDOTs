@@ -5,6 +5,7 @@
     ../../modules/nixos/base/common.nix
     ../../modules/nixos/packages/common.nix
     ../../modules/nixos/users/rodein-base.nix
+    ../../modules/nixos/features/gaming.nix
 
     ./hardware.nix
     ./system.nix
