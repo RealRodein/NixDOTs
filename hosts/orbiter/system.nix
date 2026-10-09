@@ -25,11 +25,7 @@
   # --- System ---
   networking.hostName = "orbiter";
   networking.firewall.allowedTCPPorts = [ 46561 ];
-  networking.firewall.allowedUDPPorts = [
-    46561
-    4950
-    4955
-  ];
+  networking.firewall.allowedUDPPorts = [ 46561 ];
 
   services.xserver.xkb = {
     layout = "cz";

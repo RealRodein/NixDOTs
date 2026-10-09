@@ -23,10 +23,6 @@
 
   # --- System ---
   networking.hostName = "railjack";
-  networking.firewall.allowedUDPPorts = [
-    4950
-    4955
-  ];
 
   # This network has no working IPv6 (router only gives link-local), but DNS
   # still returns AAAA records, so browsers prefer IPv6 and hang on sites like

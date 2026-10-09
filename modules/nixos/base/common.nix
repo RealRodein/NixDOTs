@@ -2,6 +2,7 @@
 
 {
   networking.networkmanager.enable = true;
+  networking.firewall.allowedUDPPorts = [ 4950 4955 ]; # Warframe peer-to-peer
   time.timeZone = "Europe/Prague";
 
   nix.settings = {
