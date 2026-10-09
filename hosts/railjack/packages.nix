@@ -5,9 +5,6 @@
     ghostty
     yazi
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
-    steam
-    gamescope
-    mangohud
     xwayland
     vesktop
     pavucontrol
