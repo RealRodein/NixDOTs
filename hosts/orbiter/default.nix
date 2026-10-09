@@ -11,6 +11,7 @@
     ../../modules/nixos/desktop/noctalia.nix
 
     # Host-local modules (keep hardware local to host).
+    ./gaming.nix
     ./hardware.nix
     ./system.nix
     ./users.nix

@@ -30,11 +30,6 @@
     yazi
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
 
-    steam
-    gamescope
-    prismlauncher
-    heroic
-    mangohud
     xwayland
     xwayland-satellite
     vesktop
